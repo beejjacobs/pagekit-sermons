@@ -2,5 +2,18 @@
   "name": "beejjacobs/sermons",
   "version": "0.1",
   "type": "pagekit-extension",
-  "title": "Sermons"
+  "title": "Sermons",
+  "description": "A sermon manager extension.",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "beejjacobs",
+      "email": "ben@benjacobs.co.uk",
+      "homepage": "http://benjacobs.co.uk"
+    }
+  ],
+  "extra": {
+    "icon": "assets/menu-icon.svg",
+    "scripts": "scripts.php"
+  }
 }
