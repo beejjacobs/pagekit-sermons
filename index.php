@@ -4,11 +4,10 @@ use Pagekit\Application;
 
 return [
 
-    'name' => 'sermons',
+    'name' => 'beejjacobs/sermons',
 
     'type' => 'extension',
 
-  // called when Pagekit initializes the module
     'main' => function (Application $app) {
       //todo: initialisation
     },
@@ -30,5 +29,9 @@ return [
             'icon' => 'packages/beejjacobs/sermons/assets/menu-icon.svg',
             'url' => '@sermons'
         ]
+    ],
+
+    'resources' => [
+        'beejjacobs/sermons' => ''
     ]
 ];

@@ -9,6 +9,12 @@ namespace beejjacobs\Sermons\Controller;
  */
 class SermonController {
   public function indexAction() {
-    return "Sermon Admin Page";
+      return [
+          '$view' => [
+              'title' => 'Edit Sermon',
+              'name' => 'beejjacobs/sermons/views/admin/edit.php'
+          ],
+          'message' => 'Hello how\'s it going?'
+      ];
   }
 }
