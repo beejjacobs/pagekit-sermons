@@ -8,10 +8,19 @@ return [
 
     'type' => 'extension',
 
-    // called when Pagekit initializes the module
+  // called when Pagekit initializes the module
     'main' => function (Application $app) {
-        //todo: initialisation
-    }
-];
+      //todo: initialisation
+    },
 
-?>
+    'autoload' => [
+        'beejjacobs\\Sermons\\' => 'src'
+    ],
+
+    'routes' => [
+        '@sermons' => [
+            'path' => '/sermons',
+            'controller' => 'beejjacobs\\Sermons\\Controller\\SermonController'
+        ]
+    ]
+];
