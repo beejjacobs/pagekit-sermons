@@ -22,5 +22,13 @@ return [
             'path' => '/sermons',
             'controller' => 'beejjacobs\\Sermons\\Controller\\SermonController'
         ]
+    ],
+
+    'menu' => [
+        'sermons' => [
+            'label' => 'Sermons',
+            'icon' => 'packages/beejjacobs/sermons/assets/menu-icon.svg',
+            'url' => '@sermons'
+        ]
     ]
 ];
