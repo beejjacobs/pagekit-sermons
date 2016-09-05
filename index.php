@@ -19,7 +19,7 @@ return [
     'routes' => [
         '@sermons' => [
             'path' => '/sermons',
-            'controller' => 'beejjacobs\\Sermons\\Controller\\SermonController'
+            'controller' => 'beejjacobs\\Sermons\\Controller\\SermonsController'
         ]
     ],
 
