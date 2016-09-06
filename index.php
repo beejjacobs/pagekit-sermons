@@ -4,7 +4,7 @@ use Pagekit\Application;
 
 return [
 
-    'name' => 'beejjacobs/sermons',
+    'name' => 'sermons',
 
     'type' => 'extension',
 
