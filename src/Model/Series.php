@@ -16,7 +16,7 @@ class Series {
 
   /**
    * @Column(type="integer")
-   * @id
+   * @Id
    */
   public $id;
 

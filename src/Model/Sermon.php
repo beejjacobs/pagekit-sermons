@@ -14,7 +14,7 @@ class Sermon {
 
   /**
    * @Column(type="integer")
-   * @id
+   * @Id
    */
   public $id;
 
