@@ -21,7 +21,7 @@ class SeriesController {
             'title' => 'Sermon Series',
             'name' => 'beejjacobs/sermons/views/admin/series.php'
         ],
-        'series' => Series::findAll()
+        'series' => Series::query()->related(Series::SERMONS)->get()
     ];
   }
 }

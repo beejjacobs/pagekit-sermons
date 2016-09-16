@@ -13,6 +13,7 @@ class Series {
 
   use ModelTrait;
 
+  const SERMONS = 'sermons';
 
   /**
    * @Column(type="integer")
