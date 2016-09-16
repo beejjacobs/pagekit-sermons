@@ -1,1 +1,1 @@
-<h1><?php echo $message; ?></h1>
+<h1>Sermon: <?php echo $id; ?></h1>

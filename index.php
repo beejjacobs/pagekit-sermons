@@ -17,9 +17,13 @@ return [
     ],
 
     'routes' => [
-        '@sermons' => [
-            'path' => '/sermons',
-            'controller' => 'beejjacobs\\Sermons\\Controller\\SermonsController'
+        '/sermons' => [
+            'name' => '@sermons',
+            'controller' => [
+                'beejjacobs\\Sermons\\Controller\\SermonsController',
+                'beejjacobs\\Sermons\\Controller\\SermonController',
+                'beejjacobs\\Sermons\\Controller\\SeriesController'
+            ]
         ]
     ],
 
@@ -27,7 +31,20 @@ return [
         'sermons' => [
             'label' => 'Sermons',
             'icon' => 'packages/beejjacobs/sermons/assets/menu-icon.svg',
-            'url' => '@sermons'
+            'url' => '@sermons',
+            'active' => '@sermons(/*)'
+        ],
+        'sermons: sermons' => [
+            'label' => 'Sermons',
+            'parent' => 'sermons',
+            'url' => '@sermons',
+            'active' => '@sermons(/edit)?'
+        ],
+        'sermons: series' => [
+            'label' => 'Series',
+            'parent' => 'sermons',
+            'url' => '@sermons/series',
+            'active' => '@sermons/series'
         ]
     ],
 

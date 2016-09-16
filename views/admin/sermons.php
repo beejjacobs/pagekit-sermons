@@ -1,1 +1,4 @@
-<div><?php echo $sermons; ?></div>
+<?php
+  foreach ($sermons as $sermon) {
+    echo 'sermons';
+  }

@@ -8,6 +8,10 @@ use beejjacobs\Sermons\Model\Sermon;
  * @Access(admin=true)
  */
 class SermonsController {
+  /**
+   * @Route("/")
+   * @return array
+   */
   public function indexAction() {
     return [
         '$view' => [
