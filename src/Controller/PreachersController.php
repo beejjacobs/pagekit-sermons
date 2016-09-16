@@ -2,6 +2,9 @@
 
 
 namespace beejjacobs\Sermons\Controller;
+
+use beejjacobs\Sermons\Model\Preacher;
+
 /**
   * @Access(admin=true)
   * @Route("/preachers", name="preachers", methods="GET")
@@ -15,7 +18,8 @@ class PreachersController {
         '$view' => [
             'title' => 'Preachers',
             'name' => 'beejjacobs/sermons/views/admin/preachers.php'
-        ]
+        ],
+        'preachers' => Preacher::query()->related(Preacher::SERMONS)->get()
     ];
   }
 }
