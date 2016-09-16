@@ -1,1 +1,3 @@
-<div><?php echo $message; ?></div>
+<?php
+
+  var_dump($series);

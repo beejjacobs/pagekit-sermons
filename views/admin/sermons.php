@@ -1,4 +1,2 @@
 <?php
-  foreach ($sermons as $sermon) {
-    echo 'sermons';
-  }
+  var_dump($sermons);
