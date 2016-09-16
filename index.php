@@ -22,7 +22,8 @@ return [
             'controller' => [
                 'beejjacobs\\Sermons\\Controller\\SermonsController',
                 'beejjacobs\\Sermons\\Controller\\SermonController',
-                'beejjacobs\\Sermons\\Controller\\SeriesController'
+                'beejjacobs\\Sermons\\Controller\\SeriesController',
+                'beejjacobs\\Sermons\\Controller\\PreachersController'
             ]
         ]
     ],
@@ -45,6 +46,12 @@ return [
             'parent' => 'sermons',
             'url' => '@sermons/series',
             'active' => '@sermons/series'
+        ],
+        'sermons: preachers' => [
+            'label' => 'Preachers',
+            'parent' => 'sermons',
+            'url' => '@sermons/preachers',
+            'active' => '@sermons/preachers'
         ]
     ],
 
