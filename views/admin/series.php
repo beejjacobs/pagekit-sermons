@@ -1,3 +1,1 @@
-<?php
-
-  var_dump($series);
+<pre><?php var_dump($series);?></pre>
