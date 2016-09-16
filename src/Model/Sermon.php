@@ -14,6 +14,7 @@ class Sermon {
 
   /**
    * @Column(type="integer")
+   * @id
    */
   public $id;
 
@@ -48,7 +49,12 @@ class Sermon {
   public $description;
 
   /**
-   * @Column(type="string")
+   * @Column(type="integer")
+   */
+  public $sermon_series_id;
+
+  /**
+   * @BelongsTo(targetEntity="beejjacobs\Sermons\Model\Series", keyFrom="sermon_series_id")
    */
   public $sermon_series;
 

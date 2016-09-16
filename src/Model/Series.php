@@ -16,6 +16,7 @@ class Series {
 
   /**
    * @Column(type="integer")
+   * @id
    */
   public $id;
 
@@ -23,5 +24,10 @@ class Series {
    * @Column(type="string")
    */
   public $name;
+
+  /**
+   * @HasMany(targetEntity="beejjacobs\Sermons\Model\Sermon", keyFrom="id", keyTo="sermon_series_id")
+   */
+  public $sermons;
 
 }
