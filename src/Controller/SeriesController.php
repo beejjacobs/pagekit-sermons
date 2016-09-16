@@ -3,6 +3,8 @@
 
 namespace beejjacobs\Sermons\Controller;
 
+use beejjacobs\Sermons\Model\Series;
+
 /**
  * Class SeriesController
  * @package beejjacobs\Sermons\Controller
@@ -19,7 +21,7 @@ class SeriesController {
             'title' => 'Sermon Series',
             'name' => 'beejjacobs/sermons/views/admin/series.php'
         ],
-        'message' => 'Series....'
+        'series' => Series::findAll()
     ];
   }
 }
