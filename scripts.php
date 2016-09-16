@@ -22,6 +22,16 @@ return [
           $table->setPrimaryKey(['id']);
         });
       }
+
+      if ($util->tableExists('@sermons_series') === false) {
+        $util->createTable('@sermons_series', function ($table) {
+
+          $table->addColumn('id', 'integer', ['unsigned' => true, 'length' => 10, 'autoincrement' => true]);
+          $table->addColumn('name', 'string', ['length' => 255]);
+
+          $table->setPrimaryKey(['id']);
+        });
+      }
     },
     'enable' => function ($app) {
 
