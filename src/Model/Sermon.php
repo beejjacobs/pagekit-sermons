@@ -35,7 +35,12 @@ class Sermon {
   public $mp3_name;
 
   /**
-   * @Column(type="string")
+   * @Column(type="integer")
+   */
+  public $preacher_id;
+
+  /**
+   * @BelongsTo(targetEntity="beejjacobs\Sermons\Model\Preacher", keyFrom="$preacher_id")
    */
   public $preacher;
 
