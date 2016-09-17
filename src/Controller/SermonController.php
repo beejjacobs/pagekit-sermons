@@ -11,6 +11,19 @@ use beejjacobs\Sermons\Model\Sermon;
  */
 class SermonController {
   /**
+   * @Route("/add", name="add")
+   */
+  public function addAction() {
+    return [
+        '$view' => [
+            'title' => 'Add Sermon',
+            'name' => 'beejjacobs/sermons/views/admin/edit.php'
+        ],
+        'new' => true
+    ];
+  }
+
+  /**
    * @Route("/edit", name="edit")
    * @Request({"id": "int"})
    * @return array
