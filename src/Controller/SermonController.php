@@ -16,8 +16,8 @@ class SermonController {
   public function addAction() {
     return [
         '$view' => [
-            'title' => 'Add Sermon',
-            'name' => 'beejjacobs/sermons/views/admin/edit.php'
+            'title' => __('Add Sermon'),
+            'name' => 'sermons/admin/edit.php'
         ],
         'new' => true
     ];
@@ -29,34 +29,26 @@ class SermonController {
    * @return array
    */
   public function editAction($id = 0) {
+    $toReturn = [
+        '$view' => [
+            'title' => __('Edit Sermon'),
+            'name' => 'sermons/admin/edit.php'
+        ]
+    ];
     if ($id == 0) {
-      return [
-          '$view' => [
-              'title' => 'Edit Sermon',
-              'name' => 'beejjacobs/sermons/views/admin/edit.php'
-          ],
-          'error' => 'Sermon id not set'
-      ];
+      $toReturn['error'] = __('Sermon id not set');
+      return $toReturn;
     }
 
     $sermon = Sermon::query()->related(Sermon::SERMON_SERIES)->where('id = ?', [$id])->first();
 
     if($sermon == null) {
-      return [
-          '$view' => [
-              'title' => 'Edit Sermon',
-              'name' => 'beejjacobs/sermons/views/admin/edit.php'
-          ],
-          'error' => 'Sermon not found'
-      ];
+      $toReturn['error'] = __('Sermon not found');
+      return $toReturn;
     }
 
-    return [
-        '$view' => [
-            'title' => 'Edit Sermon',
-            'name' => 'beejjacobs/sermons/views/admin/edit.php'
-        ],
-        'sermon' => $sermon
-    ];
+    $toReturn['sermon'] = $sermon;
+
+    return $toReturn;
   }
 }

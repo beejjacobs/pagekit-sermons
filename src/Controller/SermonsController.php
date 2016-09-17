@@ -16,8 +16,8 @@ class SermonsController {
   public function indexAction() {
     return [
         '$view' => [
-            'title' => 'Sermons',
-            'name' => 'beejjacobs/sermons/views/admin/sermons.php'
+            'title' => __('Sermons'),
+            'name' => 'sermons/admin/sermons.php'
         ],
         'sermons' => Sermon::getWithRelations()
     ];
@@ -30,7 +30,7 @@ class SermonsController {
     return [
         '$view' => [
             'title' => __('Sermon Settings'),
-            'name'  => 'beejjacobs/sermons/views/admin/settings.php'
+            'name'  => 'sermons/admin/settings.php'
         ],
         '$data' => [
             'config' => Application::module('sermons')->config()

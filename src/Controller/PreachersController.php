@@ -16,8 +16,8 @@ class PreachersController {
   public function indexAction() {
     return [
         '$view' => [
-            'title' => 'Preachers',
-            'name' => 'beejjacobs/sermons/views/admin/preachers.php'
+            'title' => __('Preachers'),
+            'name' => 'sermons/admin/preachers.php'
         ],
         'preachers' => Preacher::query()->related(Preacher::SERMONS)->get()
     ];

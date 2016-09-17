@@ -18,8 +18,8 @@ class SeriesController {
   public function indexAction() {
     return [
         '$view' => [
-            'title' => 'Sermon Series',
-            'name' => 'beejjacobs/sermons/views/admin/series.php'
+            'title' => __('Sermon Series'),
+            'name' => 'sermons/admin/series.php'
         ],
         'series' => Series::query()->related(Series::SERMONS)->get()
     ];
