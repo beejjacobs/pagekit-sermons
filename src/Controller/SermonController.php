@@ -26,6 +26,7 @@ class SermonController {
   /**
    * @Route("/edit", name="edit")
    * @Request({"id": "int"})
+   * @param int $id
    * @return array
    */
   public function editAction($id = 0) {
