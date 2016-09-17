@@ -35,7 +35,7 @@ class Sermon {
   /**
    * @Column(type="string")
    */
-  public $mp3_name;
+  public $mp3_source;
 
   /**
    * @Column(type="integer")

@@ -13,7 +13,7 @@ return [
           $table->addColumn('id', 'integer', ['unsigned' => true, 'length' => 10, 'autoincrement' => true]);
           $table->addColumn('name', 'string', ['length' => 255]);
           $table->addColumn('date', 'date');
-          $table->addColumn('mp3_name', 'string', ['length' => 512]);
+          $table->addColumn('mp3_source', 'string', ['length' => 512]);
           $table->addColumn('preacher_id', 'integer', ['unsigned' => true, 'length' => 10]);
           $table->addColumn('bible_passage', 'string', ['length' => 100]);
           $table->addColumn('description', 'text');
