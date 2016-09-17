@@ -71,6 +71,8 @@ return [
         ]
     ],
 
+    'settings' => '@sermons/settings',
+
     'resources' => [
         'beejjacobs/sermons' => ''
     ],
