@@ -8,9 +8,7 @@ return [
 
     'type' => 'extension',
 
-    'main' => function (Application $app) {
-      //todo: initialisation
-    },
+    'main' => 'beejjacobs\\Sermons\\SermonsModule',
 
     'autoload' => [
         'beejjacobs\\Sermons\\' => 'src'
