@@ -76,7 +76,7 @@ return [
 
         });
         foreach (SermonsModule::BOOKS_OF_THE_BIBLE as $book) {
-          BibleBook::create(["name" => $book])->save();
+          BibleBook::create(['name' => $book])->save();
         }
       }
 
