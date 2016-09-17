@@ -76,6 +76,16 @@ class SermonsModule extends Module {
       "Revelation"
   ];
 
+  const DB_TABLES = [
+    "@sermons_sermons",
+    "@sermons_series",
+    "@sermons_preachers",
+    "@sermons_topics",
+    "@sermons_sermon_topics",
+    "@sermons_bible_books",
+    "@sermons_sermon_bible_books"
+  ];
+
   public function main(Application $app) {
     //todo: initialisation
   }

@@ -96,32 +96,11 @@ return [
     },
     'uninstall' => function ($app) {
       $util = $app['db']->getUtility();
-      if ($util->tableExists('@sermons_sermons')) {
-        $util->dropTable('@sermons_sermons');
-      }
 
-      if ($util->tableExists('@sermons_series')) {
-        $util->dropTable('@sermons_series');
-      }
-
-      if ($util->tableExists('@sermons_preachers')) {
-        $util->dropTable('@sermons_preachers');
-      }
-
-      if ($util->tableExists('@sermons_topics')) {
-        $util->dropTable('@sermons_topics');
-      }
-
-      if ($util->tableExists('@sermons_sermon_topics')) {
-        $util->dropTable('@sermons_sermon_topics');
-      }
-
-      if ($util->tableExists('@sermons_bible_books')) {
-        $util->dropTable('@sermons_bible_books');
-      }
-
-      if ($util->tableExists('@sermons_sermon_bible_books')) {
-        $util->dropTable('@sermons_sermon_bible_books');
+      foreach (SermonsModule::DB_TABLES as $table) {
+        if ($util->tableExists($table)) {
+          $util->dropTable($table);
+        }
       }
     },
     'updates' => [
