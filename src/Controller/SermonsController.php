@@ -18,7 +18,7 @@ class SermonsController {
             'title' => 'Sermons',
             'name' => 'beejjacobs/sermons/views/admin/sermons.php'
         ],
-        'sermons' => Sermon::query()->related(Sermon::SERMON_SERIES)->get()
+        'sermons' => Sermon::getWithRelations()
     ];
   }
 }

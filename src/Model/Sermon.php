@@ -81,4 +81,11 @@ class Sermon {
    */
   public $feature_image;
 
+  /**
+   * @return array
+   */
+  public static function getWithRelations() {
+    return self::query()->related([self::SERMON_SERIES, self::PREACHER, self::TOPICS])->get();
+  }
+
 }
