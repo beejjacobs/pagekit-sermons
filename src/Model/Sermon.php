@@ -14,6 +14,7 @@ class Sermon {
   const SERMON_SERIES = 'sermon_series';
   const PREACHER = 'preacher';
   const TOPICS = 'topics';
+  const BIBLE_BOOKS = 'bible_books';
 
   /**
    * @Column(type="integer")
@@ -52,6 +53,11 @@ class Sermon {
   public $bible_passage;
 
   /**
+   * @ManyToMany(targetEntity="beejjacobs\Sermons\Model\BibleBook", tableThrough="@sermons_sermon_bible_books", keyThroughFrom="sermon_id", keyThroughTo="bible_book_id")
+   */
+  public $bible_books;
+
+  /**
    * @Column(type="text")
    */
   public $description;
@@ -85,7 +91,7 @@ class Sermon {
    * @return array
    */
   public static function getWithRelations() {
-    return self::query()->related([self::SERMON_SERIES, self::PREACHER, self::TOPICS])->get();
+    return self::query()->related([self::SERMON_SERIES, self::PREACHER, self::TOPICS, self::BIBLE_BOOKS])->get();
   }
 
 }
