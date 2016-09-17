@@ -12,6 +12,8 @@ class Sermon {
   use ModelTrait;
 
   const SERMON_SERIES = 'sermon_series';
+  const PREACHER = 'preacher';
+  const TOPICS = 'topics';
 
   /**
    * @Column(type="integer")
@@ -40,7 +42,7 @@ class Sermon {
   public $preacher_id;
 
   /**
-   * @BelongsTo(targetEntity="beejjacobs\Sermons\Model\Preacher", keyFrom="$preacher_id")
+   * @BelongsTo(targetEntity="beejjacobs\Sermons\Model\Preacher", keyFrom="preacher_id")
    */
   public $preacher;
 
@@ -70,9 +72,9 @@ class Sermon {
   public $sermon_notes;
 
   /**
-   * @Column(type="string")
+   * @ManyToMany(targetEntity="beejjacobs\Sermons\Model\Topic", tableThrough="@sermons_sermon_topics", keyThroughFrom="sermon_id", keyThroughTo="topic_id")
    */
-  public $sermon_topics;
+  public $topics;
 
   /**
    * @Column(type="string")

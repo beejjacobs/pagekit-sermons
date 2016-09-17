@@ -16,7 +16,6 @@ return [
           $table->addColumn('description', 'text');
           $table->addColumn('sermon_series_id', 'integer', ['unsigned' => true, 'length' => 10]);
           $table->addColumn('sermon_notes', 'text');
-          $table->addColumn('sermon_topics', 'string', ['length' => 255]);
           $table->addColumn('feature_image', 'string', ['length' => 255]);
 
           $table->setPrimaryKey(['id']);
@@ -38,6 +37,27 @@ return [
 
           $table->addColumn('id', 'integer', ['unsigned' => true, 'length' => 10, 'autoincrement' => true]);
           $table->addColumn('name', 'string', ['length' => 255]);
+
+          $table->setPrimaryKey(['id']);
+        });
+      }
+
+      if ($util->tableExists('@sermons_topics') === false) {
+        $util->createTable('@sermons_topics', function ($table) {
+
+          $table->addColumn('id', 'integer', ['unsigned' => true, 'length' => 10, 'autoincrement' => true]);
+          $table->addColumn('name', 'string', ['length' => 255]);
+
+          $table->setPrimaryKey(['id']);
+        });
+      }
+
+      if ($util->tableExists('@sermons_sermon_topics') === false) {
+        $util->createTable('@sermons_sermon_topics', function ($table) {
+
+          $table->addColumn('id', 'integer', ['unsigned' => true, 'length' => 10, 'autoincrement' => true]);
+          $table->addColumn('sermon_id', 'integer', ['unsigned' => true, 'length' => 10, 'default' => 0]);
+          $table->addColumn('topic_id', 'integer', ['unsigned' => true, 'length' => 10, 'default' => 0]);
 
           $table->setPrimaryKey(['id']);
         });
