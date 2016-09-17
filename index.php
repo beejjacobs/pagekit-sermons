@@ -61,6 +61,13 @@ return [
             'url' => '@sermons/topics',
             'active' => '@sermons/topics',
             'access' => 'sermons: manage topics'
+        ],
+        'sermons: settings' => [
+            'label' => 'Settings',
+            'parent' => 'sermons',
+            'url' => '@sermons/settings',
+            'active' => '@sermons/settings',
+            'access' => 'system: access settings'
         ]
     ],
 
@@ -80,6 +87,20 @@ return [
         ],
         'sermons: manage topics' => [
             'title' => 'Manage topics'
+        ]
+    ],
+
+    'config' => [
+        'sermons' => [
+            'sermons_per_page' => 20,
+        ],
+        'permalink' => [
+            'type' => '',
+            'custom' => '{slug}'
+        ],
+        'feed' => [
+            'type' => 'rss2',
+            'limit' => 20
         ]
     ]
 ];
