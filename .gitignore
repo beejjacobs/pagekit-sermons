@@ -1,3 +1,6 @@
 # IntelliJ project files
 .idea
 *.iml
+
+#webpack
+app/bundle

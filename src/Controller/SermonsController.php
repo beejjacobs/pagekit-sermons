@@ -32,7 +32,9 @@ class SermonsController {
             'title' => __('Sermon Settings'),
             'name'  => 'beejjacobs/sermons/views/admin/settings.php'
         ],
-        'config' => Application::module('sermons')->config()
+        '$data' => [
+            'config' => Application::module('sermons')->config()
+        ]
     ];
   }
 }
