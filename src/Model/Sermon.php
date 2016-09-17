@@ -25,7 +25,12 @@ class Sermon {
   /**
    * @Column(type="string")
    */
-  public $name;
+  public $title;
+
+  /**
+   * @Column(type="string")
+   */
+  public $slug;
 
   /**
    * @Column(type="date")
