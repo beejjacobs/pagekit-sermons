@@ -7,7 +7,7 @@ use Pagekit\Database\ORM\ModelTrait;
 /**
  * @Entity(tableClass="@sermons_sermons")
  */
-class Sermon {
+class Sermon implements \JsonSerializable {
 
   use ModelTrait;
 
@@ -15,6 +15,13 @@ class Sermon {
   const PREACHER = 'preacher';
   const TOPICS = 'topics';
   const BIBLE_BOOKS = 'bible_books';
+
+  const RELATED = [
+      self::SERMON_SERIES,
+      self::PREACHER,
+      self::TOPICS,
+      self::BIBLE_BOOKS
+  ];
 
   /**
    * @Column(type="integer")
@@ -96,7 +103,24 @@ class Sermon {
    * @return array
    */
   public static function getWithRelations() {
-    return self::query()->related([self::SERMON_SERIES, self::PREACHER, self::TOPICS, self::BIBLE_BOOKS])->get();
+    return self::query()->related(self::RELATED)->get();
+  }
+
+  public function jsonSerialize() {
+    $data = [];
+    if ($this->preacher) {
+      $data['preacher'] = $this->preacher->toArray();
+    }
+    if ($this->bible_books) {
+      $data['bible_books'] = $this->bible_books;
+    }
+    if ($this->sermon_series) {
+      $data['sermon_series'] = $this->sermon_series->toArray();
+    }
+    if ($this->topics) {
+      $data['topics'] = $this->topics;
+    }
+    return $this->toArray($data);
   }
 
 }

@@ -8,7 +8,7 @@ use Pagekit\Database\ORM\ModelTrait;
 /**
  * @Entity(tableClass="@sermons_preachers")
  */
-class Preacher {
+class Preacher implements \JsonSerializable {
 
   use ModelTrait;
 
@@ -29,5 +29,13 @@ class Preacher {
    * @HasMany(targetEntity="beejjacobs\Sermons\Model\Sermon", keyFrom="id", keyTo="preacher_id")
    */
   public $sermons;
+
+  public function jsonSerialize() {
+    $data = [];
+    if ($this->sermons) {
+      $data['sermons'] = $this->sermons;
+    }
+    return $this->toArray($data);
+  }
 
 }
