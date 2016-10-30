@@ -17,6 +17,12 @@
         <div class="uk-margin-left">
           <ul class="uk-subnav pk-subnav-icon">
             <li>
+              <a class="pk-icon-check pk-icon-hover" title="Publish" data-uk-tooltip="{delay: 500}" @click="status(1)"></a>
+            </li>
+            <li>
+              <a class="pk-icon-block pk-icon-hover" title="Unpublish" data-uk-tooltip="{delay: 500}" @click="status(0)"></a>
+            </li>
+            <li>
               <a class="pk-icon-copy pk-icon-hover" title="Copy" data-uk-tooltip="{delay: 500}" @click="copy"></a>
             </li>
             <li>
@@ -80,10 +86,7 @@
         <td class="uk-text-center">
           <a :title="getStatusText(sermon)" :class="{
                                 'pk-icon-circle': sermon.status == 0,
-                                'pk-icon-circle-warning': sermon.status == 1,
-                                'pk-icon-circle-success': sermon.status == 2 && sermon.published,
-                                'pk-icon-circle-danger': sermon.status == 3,
-                                'pk-icon-schedule': sermon.status == 2 && !sermon.published
+                                'pk-icon-circle-success': sermon.status == 1
                             }" @click="toggleStatus(sermon)"></a>
         </td>
         <td>

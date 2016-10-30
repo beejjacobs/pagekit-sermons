@@ -21,9 +21,13 @@ class SermonApiController {
    */
   public function indexAction($filter = [], $page = 0) {
     $query = Sermon::query();
-    $filter = array_merge(array_fill_keys(['search', 'preacher', 'order', 'limit'], ''), $filter);
+    $filter = array_merge(array_fill_keys(['status', 'search', 'preacher', 'order', 'limit'], ''), $filter);
 
     extract($filter, EXTR_SKIP);
+
+    if (is_numeric($status)) {
+      $query->where(['status' => (int) $status]);
+    }
 
     if (!preg_match('/^(date|title)\s(asc|desc)$/i', $order, $order)) {
       $order = [1 => 'date', 2 => 'desc'];
@@ -51,8 +55,8 @@ class SermonApiController {
   /**
    * @Route("/", methods="POST")
    * @Route("/{id}", methods="POST", requirements={"id"="\d+"})
-   * @Request({"post": "array", "id": "int"}, csrf=true)
-   * @param $data
+   * @Request({"sermon": "array", "id": "int"}, csrf=true)
+   * @param Sermon $data
    * @param int $id
    * @return array
    */
@@ -108,6 +112,7 @@ class SermonApiController {
 
         $sermon = clone $sermon;
         $sermon->id = null;
+        $sermon->status = Sermon::STATUS_UNPUBLISHED;
         $sermon->title = $sermon->title.' - '.__('Copy');
         $sermon->date = new \DateTime();
         $sermon->save();
@@ -119,7 +124,7 @@ class SermonApiController {
 
   /**
    * @Route("/bulk", methods="POST")
-   * @Request({"posts": "array"}, csrf=true)
+   * @Request({"sermons": "array"}, csrf=true)
    * @param array $sermons
    * @return array
    */

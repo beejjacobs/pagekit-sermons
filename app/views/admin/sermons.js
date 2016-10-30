@@ -38,6 +38,18 @@ module.exports = {
 
   },
 
+  computed: {
+
+    statusOptions: function () {
+
+      var options = _.map(this.$data.statuses, function (status, id) {
+        return { text: status, value: id };
+      });
+
+      return [{ label: this.$trans('Filter by'), options: options }];
+    }
+  },
+
   methods: {
 
     active: function (sermon) {
@@ -74,7 +86,7 @@ module.exports = {
     },
 
     toggleStatus: function (sermon) {
-      sermon.status = sermon.status === 2 ? 3 : 2;
+      sermon.status = sermon.status === 1 ? 0 : 1;
       this.save(sermon);
     },
 
@@ -93,10 +105,6 @@ module.exports = {
       this.resource.query({filter: this.config.filter, page: this.config.page}).then(function (res) {
 
         var data = res.data;
-
-        data.sermons.forEach(function (sermon) {
-          sermon.date = new Date(sermon.date.date);
-        });
 
         this.$set('sermons', data.sermons);
         this.$set('pages', data.pages);

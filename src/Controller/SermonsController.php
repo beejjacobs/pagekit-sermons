@@ -18,8 +18,7 @@ class SermonsController {
         '$view' => [
             'title' => __('Sermons'),
             'name' => 'sermons/admin/sermons.php'
-        ],
-        'sermons' => Sermon::getWithRelations()
+        ]
     ];
   }
 

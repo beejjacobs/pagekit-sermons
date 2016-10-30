@@ -11,9 +11,10 @@ return [
         $util->createTable('@sermons_sermons', function ($table) {
 
           $table->addColumn('id', 'integer', ['unsigned' => true, 'length' => 10, 'autoincrement' => true]);
+          $table->addColumn('status', 'smallint');
           $table->addColumn('title', 'string', ['length' => 255]);
           $table->addColumn('slug', 'string', ['length' => 255]);
-          $table->addColumn('date', 'date');
+          $table->addColumn('date', 'datetime');
           $table->addColumn('mp3_source', 'string', ['length' => 512]);
           $table->addColumn('preacher_id', 'integer', ['unsigned' => true, 'length' => 10]);
           $table->addColumn('bible_passage', 'string', ['length' => 100]);
