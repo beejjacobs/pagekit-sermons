@@ -2,15 +2,15 @@
 namespace beejjacobs\Sermons\Controller;
 
 
-use beejjacobs\Sermons\Model\Sermon;
+use beejjacobs\Sermons\Model\Preacher;
 use Pagekit\Application;
 
 /**
- * Class SermonApiController
+ * Class PreacherApiController
  * @package beejjacobs\Sermons\Controller
- * @Route("sermon", name="sermon")
+ * @Route("preacher", name="preacher")
  */
-class SermonApiController {
+class PreacherApiController {
 
   /**
    * @Route("/", methods="GET")
@@ -20,13 +20,13 @@ class SermonApiController {
    * @return mixed
    */
   public function indexAction($filter = [], $page = 0) {
-    $query = Sermon::query();
-    $filter = array_merge(array_fill_keys(['search', 'preacher', 'order', 'limit'], ''), $filter);
+    $query = Preacher::query();
+    $filter = array_merge(array_fill_keys(['search', 'order', 'limit'], ''), $filter);
 
     extract($filter, EXTR_SKIP);
 
-    if (!preg_match('/^(date|title)\s(asc|desc)$/i', $order, $order)) {
-      $order = [1 => 'date', 2 => 'desc'];
+    if (!preg_match('/^(name)\s(asc|desc)$/i', $order, $order)) {
+      $order = [1 => 'name', 2 => 'asc'];
     }
 
     $limit = (int) $limit ?: Application::module('sermons')->config('sermons.sermons_per_page');
@@ -34,9 +34,9 @@ class SermonApiController {
     $pages = ceil($count / $limit);
     $page  = max(0, min($pages - 1, $page));
 
-    $sermons = array_values($query->offset($page * $limit)->related(Sermon::RELATED)->limit($limit)->orderBy($order[1], $order[2])->get());
+    $preachers = array_values($query->offset($page * $limit)->limit($limit)->orderBy($order[1], $order[2])->get());
 
-    return compact('sermons', 'pages', 'count');
+    return compact('preachers', 'pages', 'count');
   }
 
   /**
@@ -45,7 +45,7 @@ class SermonApiController {
    * @return mixed
    */
   public function getAction($id) {
-    return Sermon::where(compact('id'))->related(Sermon::RELATED)->first();
+    return Preacher::where(compact('id'))->first();
   }
 
   /**
@@ -57,21 +57,21 @@ class SermonApiController {
    * @return array
    */
   public function saveAction($data, $id = 0) {
-    if (!$id || !$sermon = Sermon::find($id)) {
+    if (!$id || !$preacher = Preacher::find($id)) {
       if ($id) {
-        Application::abort(404, __('Post not found.'));
+        Application::abort(404, __('Preacher not found.'));
       }
 
-      $sermon = Sermon::create();
+      $preacher = Preacher::create();
     }
 
-    if (!Application::user()->hasAccess('sermons: manage sermons')) {
+    if (!Application::user()->hasAccess('sermons: manage preachers')) {
       Application::abort(400, __('Access denied.'));
     }
 
-    $sermon->save($data);
+    $preacher->save($data);
 
-    return ['message' => 'success', 'sermon' => $sermon];
+    return ['message' => 'success', 'preacher' => $preacher];
   }
 
   /**
@@ -81,37 +81,13 @@ class SermonApiController {
    * @return array
    */
   public function deleteAction($id) {
-    if ($sermon = Sermon::find($id)) {
+    if ($preacher = Preacher::find($id)) {
 
-      if (!Application::user()->hasAccess('sermons: manage sermons')) {
+      if (!Application::user()->hasAccess('sermons: manage preachers')) {
         Application::abort(400, __('Access denied.'));
       }
 
-      $sermon->delete();
-    }
-
-    return ['message' => 'success'];
-  }
-
-  /**
-   * @Route(methods="POST")
-   * @Request({"ids": "int[]"}, csrf=true)
-   * @param array $ids
-   * @return array
-   */
-  public function copyAction($ids = []) {
-    foreach ($ids as $id) {
-      if ($sermon = Sermon::find((int) $id)) {
-        if(!Application::user()->hasAccess('sermons: manage sermons')) {
-          continue;
-        }
-
-        $sermon = clone $sermon;
-        $sermon->id = null;
-        $sermon->title = $sermon->title.' - '.__('Copy');
-        $sermon->date = new \DateTime();
-        $sermon->save();
-      }
+      $preacher->delete();
     }
 
     return ['message' => 'success'];
@@ -120,11 +96,11 @@ class SermonApiController {
   /**
    * @Route("/bulk", methods="POST")
    * @Request({"posts": "array"}, csrf=true)
-   * @param array $sermons
+   * @param array $preachers
    * @return array
    */
-  public function bulkSaveAction($sermons = []) {
-    foreach ($sermons as $data) {
+  public function bulkSaveAction($preachers = []) {
+    foreach ($preachers as $data) {
       $this->saveAction($data, isset($data['id']) ? $data['id'] : 0);
     }
 

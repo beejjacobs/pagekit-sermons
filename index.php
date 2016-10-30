@@ -28,7 +28,11 @@ return [
         '/api/sermons' => [
             'name' => '@sermons/api',
             'controller' => [
-                'beejjacobs\\Sermons\\Controller\\SermonApiController'
+                'beejjacobs\\Sermons\\Controller\\SermonApiController',
+                'beejjacobs\\Sermons\\Controller\\TopicApiController',
+                'beejjacobs\\Sermons\\Controller\\PreacherApiController',
+                'beejjacobs\\Sermons\\Controller\\SeriesApiController',
+                'beejjacobs\\Sermons\\Controller\\BibleBookApiController'
             ]
         ]
     ],
