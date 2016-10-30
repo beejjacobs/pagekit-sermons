@@ -65,7 +65,7 @@
         </th>
         <th class="pk-table-width-100">
           <input-filter :title="$trans('Preacher')" :value.sync="config.filter.preacher"
-                        :options="preachers"></input-filter>
+                        :options="preacherOptions"></input-filter>
         </th>
         <th class="pk-table-width-100" v-order:date="config.filter.order">
           {{ 'Date' | trans }}

@@ -2,6 +2,7 @@
 
 namespace beejjacobs\Sermons\Controller;
 
+use beejjacobs\Sermons\Model\Preacher;
 use beejjacobs\Sermons\Model\Sermon;
 use Pagekit\Application;
 
@@ -18,6 +19,10 @@ class SermonsController {
         '$view' => [
             'title' => __('Sermons'),
             'name' => 'sermons/admin/sermons.php'
+        ],
+        '$data' => [
+            'statuses' => Sermon::getStatuses(),
+            'preachers' => Preacher::findAll()
         ]
     ];
   }

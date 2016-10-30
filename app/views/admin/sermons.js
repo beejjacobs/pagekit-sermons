@@ -47,6 +47,14 @@ module.exports = {
       });
 
       return [{ label: this.$trans('Filter by'), options: options }];
+    },
+
+    preacherOptions: function () {
+      var options = _.map(this.$data.preachers, function (preacher, id) {
+        return { text: preacher.name, value: id };
+      });
+
+      return [{ label: this.$trans('Filter by'), options: options }];
     }
   },
 
