@@ -25,6 +25,12 @@ class SeriesApiController {
 
     extract($filter, EXTR_SKIP);
 
+    if ($search) {
+      $query->where(function ($query) use ($search) {
+        $query->orWhere(['name LIKE :search'], ['search' => "%{$search}%"]);
+      });
+    }
+
     if (!preg_match('/^(name)\s(asc|desc)$/i', $order, $order)) {
       $order = [1 => 'name', 2 => 'asc'];
     }

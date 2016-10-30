@@ -29,6 +29,12 @@ class SermonApiController {
       $query->where(['status' => (int) $status]);
     }
 
+    if ($search) {
+      $query->where(function ($query) use ($search) {
+        $query->orWhere(['title LIKE :search', 'slug LIKE :search'], ['search' => "%{$search}%"]);
+      });
+    }
+
     if (!preg_match('/^(date|title)\s(asc|desc)$/i', $order, $order)) {
       $order = [1 => 'date', 2 => 'desc'];
     }
