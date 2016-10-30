@@ -105,6 +105,9 @@ return [
     'config' => [
         'sermons' => [
             'sermons_per_page' => 20,
+            'series_per_page' => 20,
+            'preachers_per_page' => 20,
+            'topics_per_page' => 20
         ],
         'permalink' => [
             'type' => '',

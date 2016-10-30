@@ -35,7 +35,7 @@ class TopicApiController {
       $order = [1 => 'name', 2 => 'asc'];
     }
 
-    $limit = (int) $limit ?: Application::module('sermons')->config('sermons.sermons_per_page');
+    $limit = (int) $limit ?: Application::module('sermons')->config('sermons.topics_per_page');
     $count = $query->count();
     $pages = ceil($count / $limit);
     $page  = max(0, min($pages - 1, $page));

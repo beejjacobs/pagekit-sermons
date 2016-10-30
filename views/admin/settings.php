@@ -65,6 +65,33 @@
         </div>
       </div>
 
+      <div class="uk-form-row">
+        <label class="uk-form-label">{{ 'Series per page' | trans }}</label>
+        <div class="uk-form-controls uk-form-controls-text">
+          <p class="uk-form-controls-condensed">
+            <input type="number" v-model="config.sermons.series_per_page" class="uk-form-width-small">
+          </p>
+        </div>
+      </div>
+
+      <div class="uk-form-row">
+        <label class="uk-form-label">{{ 'Preachers per page' | trans }}</label>
+        <div class="uk-form-controls uk-form-controls-text">
+          <p class="uk-form-controls-condensed">
+            <input type="number" v-model="config.sermons.preachers_per_page" class="uk-form-width-small">
+          </p>
+        </div>
+      </div>
+
+      <div class="uk-form-row">
+        <label class="uk-form-label">{{ 'Topics per page' | trans }}</label>
+        <div class="uk-form-controls uk-form-controls-text">
+          <p class="uk-form-controls-condensed">
+            <input type="number" v-model="config.sermons.topics_per_page" class="uk-form-width-small">
+          </p>
+        </div>
+      </div>
+
     </div>
   </div>
 
