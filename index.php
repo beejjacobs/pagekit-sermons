@@ -24,6 +24,12 @@ return [
                 'beejjacobs\\Sermons\\Controller\\PreachersController',
                 'beejjacobs\\Sermons\\Controller\\TopicsController'
             ]
+        ],
+        '/api/sermons' => [
+            'name' => '@sermons/api',
+            'controller' => [
+                'beejjacobs\\Sermons\\Controller\\SermonApiController'
+            ]
         ]
     ],
 
