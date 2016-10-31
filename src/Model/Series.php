@@ -11,7 +11,7 @@ use Pagekit\Database\ORM\ModelTrait;
  */
 class Series implements \JsonSerializable {
 
-  use ModelTrait;
+  use SeriesModelTrait;
 
   const SERMONS = 'sermons';
 
@@ -30,6 +30,11 @@ class Series implements \JsonSerializable {
    * @HasMany(targetEntity="beejjacobs\Sermons\Model\Sermon", keyFrom="id", keyTo="sermon_series_id")
    */
   public $sermons;
+
+  /**
+   * @Column(type="integer")
+   */
+  public $sermon_count = 0;
 
   public function jsonSerialize() {
     $data = [];

@@ -5,6 +5,10 @@ use beejjacobs\Sermons\SermonsModule;
 
 return [
     'install' => function ($app) {
+      /**
+       * @var \Pagekit\Application $app
+       * @var \Pagekit\Database\Utility $util
+       */
       $util = $app['db']->getUtility();
 
       if ($util->tableExists('@sermons_sermons') === false) {
@@ -32,6 +36,7 @@ return [
 
           $table->addColumn('id', 'integer', ['unsigned' => true, 'length' => 10, 'autoincrement' => true]);
           $table->addColumn('name', 'string', ['length' => 255]);
+          $table->addColumn('sermon_count', 'integer', ['default' => 0]);
 
           $table->setPrimaryKey(['id']);
         });

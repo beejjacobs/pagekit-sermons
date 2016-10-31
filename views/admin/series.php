@@ -59,7 +59,7 @@
         <td>
           <a :href="$url.route('admin/sermons/series/edit', { id: series.id })">{{ series.name }}</a>
         </td>
-        <td>
+        <td class="uk-text-center">
           {{ series.sermon_count }}
         </td>
       </tr>

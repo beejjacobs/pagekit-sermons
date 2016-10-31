@@ -1,5 +1,6 @@
 <?php
 
+use beejjacobs\Sermons\Event\SeriesListener;
 use Pagekit\Application;
 
 return [
@@ -117,5 +118,16 @@ return [
             'type' => 'rss2',
             'limit' => 20
         ]
+    ],
+
+    'events' => [
+        'boot' => function ($event, $app) {
+          /**
+           * @var Application $app
+           */
+          $app->subscribe(
+              new SeriesListener()
+          );
+        }
     ]
 ];
