@@ -48,7 +48,7 @@
           <input type="checkbox" v-check-all:selected.literal="input[name=id]" number>
         </th>
         <th class="pk-table-min-width-200" v-order:title="config.filter.order">
-          {{ 'Title' | trans }}
+          {{ 'Name' | trans }}
         </th>
         <th class="pk-table-width-100 uk-text-center" v-order:sermon_count="config.filter.order">
           {{ 'Sermons' | trans }}
@@ -63,7 +63,7 @@
         <td>
           <a :href="$url.route('admin/sermons/preachers/edit', { id: preacher.id })">{{ preacher.name }}</a>
         </td>
-        <td>
+        <td class="uk-text-center">
           {{ preacher.sermon_count }}
         </td>
       </tr>
