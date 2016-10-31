@@ -1,6 +1,6 @@
 <?php
 
-use beejjacobs\Sermons\Event\SeriesListener;
+use beejjacobs\Sermons\Event\SermonListener;
 use Pagekit\Application;
 
 return [
@@ -126,7 +126,7 @@ return [
            * @var Application $app
            */
           $app->subscribe(
-              new SeriesListener()
+              new SermonListener()
           );
         }
     ]

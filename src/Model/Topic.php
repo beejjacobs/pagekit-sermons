@@ -10,7 +10,7 @@ use Pagekit\Database\ORM\ModelTrait;
  */
 class Topic implements \JsonSerializable {
 
-  use ModelTrait;
+  use TopicModelTrait;
 
   const SERMONS = 'sermons';
 
@@ -29,6 +29,11 @@ class Topic implements \JsonSerializable {
    * @ManyToMany(targetEntity="beejjacobs\Sermons\Model\Sermon", tableThrough="@sermons_sermon_topics", keyThroughFrom="topic_id", keyThroughTo="sermon_id")
    */
   public $sermons;
+
+  /**
+   * @Column(type="integer")
+   */
+  public $sermon_count = 0;
 
   public function jsonSerialize() {
     $data = [];

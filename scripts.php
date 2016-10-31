@@ -47,6 +47,7 @@ return [
 
           $table->addColumn('id', 'integer', ['unsigned' => true, 'length' => 10, 'autoincrement' => true]);
           $table->addColumn('name', 'string', ['length' => 255]);
+          $table->addColumn('sermon_count', 'integer', ['default' => 0]);
 
           $table->setPrimaryKey(['id']);
         });
@@ -57,6 +58,7 @@ return [
 
           $table->addColumn('id', 'integer', ['unsigned' => true, 'length' => 10, 'autoincrement' => true]);
           $table->addColumn('name', 'string', ['length' => 255]);
+          $table->addColumn('sermon_count', 'integer', ['default' => 0]);
 
           $table->setPrimaryKey(['id']);
         });
@@ -78,6 +80,7 @@ return [
 
           $table->addColumn('id', 'integer', ['unsigned' => true, 'length' => 10, 'autoincrement' => true]);
           $table->addColumn('name', 'string', ['length' => 255]);
+          $table->addColumn('sermon_count', 'integer', ['default' => 0]);
 
           $table->setPrimaryKey(['id']);
 

@@ -10,7 +10,7 @@ use Pagekit\Database\ORM\ModelTrait;
  */
 class Preacher implements \JsonSerializable {
 
-  use ModelTrait;
+  use PreacherModelTrait;
 
   const SERMONS = 'sermons';
 
@@ -29,6 +29,11 @@ class Preacher implements \JsonSerializable {
    * @HasMany(targetEntity="beejjacobs\Sermons\Model\Sermon", keyFrom="id", keyTo="preacher_id")
    */
   public $sermons;
+
+  /**
+   * @Column(type="integer")
+   */
+  public $sermon_count = 0;
 
   public function jsonSerialize() {
     $data = [];
