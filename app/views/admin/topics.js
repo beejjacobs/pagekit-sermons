@@ -48,7 +48,11 @@ module.exports = {
     },
 
     newTopic: function () {
-      this.save(this.new_topic);
+      this.resource.save({topic: this.new_topic}).then(function () {
+        this.load();
+        this.$notify('Topic created.');
+        this.$set('new_topic', {id: null, name: ''});
+      });
     },
 
     edit: function (topic) {
@@ -63,7 +67,7 @@ module.exports = {
       this.resource.save({id: topic.id}, {topic: topic}).then(function () {
         this.load();
         this.$notify('Topic saved.');
-        this.resetData();
+        this.$set('topic_editing', false);
       });
     },
 
@@ -91,11 +95,6 @@ module.exports = {
       return this.topics.filter(function (topic) {
         return this.selected.indexOf(topic.id) !== -1;
       }, this);
-    },
-
-    resetData: function () {
-      this.$set('topic_editing', false);
-      this.$set('new_topic', {id: null, name: ''});
     }
 
   }
