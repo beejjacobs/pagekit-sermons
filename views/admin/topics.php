@@ -1,43 +1,44 @@
-<?php $view->script('sermons', 'sermons:app/bundle/topics.js', 'vue') ?>
+<?php $view->script('sermons', 'sermons:app/bundle/topics.js', ['vue', 'uikit']) ?>
 
-<div id="topics" class="uk-form" v-cloak>
+<div id="topics" class="uk-form" v-cloak xmlns:v-order="http://www.w3.org/1999/xhtml">
 
   <div class="uk-margin uk-flex uk-flex-space-between uk-flex-wrap" data-uk-margin>
-    <div class="uk-flex uk-flex-middle uk-flex-wrap" data-uk-margin>
-
-      <h2 class="uk-margin-remove" v-if="!selected.length">
-        {{ '{0} %count% Topics|{1} %count% Topic|]1,Inf[ %count% Topics' | transChoice count {count:count} }}
-      </h2>
-
-      <template v-else>
-        <h2 class="uk-margin-remove">
-          {{ '{1} %count% Topic selected|]1,Inf[ %count% Topics selected' | transChoice selected.length {count:selected.length} }}
+      <div class="uk-flex uk-flex-middle uk-flex-wrap" data-uk-margin>
+        <h2 class="uk-margin-remove" v-if="!selected.length">
+          {{ '{0} %count% Topics|{1} %count% Topic|]1,Inf[ %count% Topics' | transChoice count {count:count} }}
         </h2>
 
-        <div class="uk-margin-left">
-          <ul class="uk-subnav pk-subnav-icon">
-            <li>
-              <a class="pk-icon-delete pk-icon-hover" title="Delete" data-uk-tooltip="{delay: 500}" @click="remove"
-                   v-confirm="'Delete Topics?'"></a>
-            </li>
-          </ul>
-        </div>
-      </template>
+        <template v-else>
+          <h2 class="uk-margin-remove">
+            {{ '{1} %count% Topic selected|]1,Inf[ %count% Topics selected' | transChoice selected.length {count:selected.length} }}
+          </h2>
 
-      <div class="pk-search">
-        <div class="uk-search">
-          <input class="uk-search-field" type="text" v-model="config.filter.search" debounce="300">
+          <div class="uk-margin-left">
+            <ul class="uk-subnav pk-subnav-icon">
+              <li>
+                <a class="pk-icon-delete pk-icon-hover" title="Delete" data-uk-tooltip="{delay: 500}" @click="remove"
+                   v-confirm="'Delete Topics?'"></a>
+              </li>
+            </ul>
+          </div>
+        </template>
+
+        <div class="pk-search">
+          <div class="uk-search">
+            <input class="uk-search-field" type="text" v-model="config.filter.search" debounce="300">
+          </div>
         </div>
       </div>
+      <div class="uk-flex uk-flex-middle uk-flex-wrap" data-uk-margin>
+        <form id="new_topic" class="uk-form" v-validator="form" @submit.prevent="newTopic | valid" v-cloak>
 
-    </div>
-    <div data-uk-margin>
+        <input type="text" name="name" v-model="new_topic.name" :placeholder="'New Topic' | trans" v-validate:required>
 
-      <a class="uk-button uk-button-primary" :href="$url.route('admin/sermons/topics/edit')">
-        {{ 'Add Topic' | trans }}
-      </a>
+        <button class="uk-button uk-button-primary" type="submit">{{ 'Save' | trans }}</button>
 
-    </div>
+        <p class="uk-form-help-block uk-text-danger" v-show="form.name.invalid">{{ 'Topic cannot be blank.' | trans }}</p>
+        </form>
+      </div>
   </div>
 
   <div class="uk-overflow-container">
@@ -61,7 +62,19 @@
           <input type="checkbox" name="id" :value="topic.id">
         </td>
         <td>
-          <a :href="$url.route('admin/sermons/topics/edit', { id: topic.id })">{{ topic.name }}</a>
+          <a v-show="topic_editing.id !== topic.id" @click="edit(topic)">{{ topic.name }}</a>
+
+          <div v-show="topic_editing.id == topic.id">
+            <input type="text" v-model="topic_editing.name" debounce="300">
+
+            <a class="uk-button uk-button-primary" @click="save(topic_editing)">
+              {{ 'Save' | trans }}
+            </a>
+            <a class="uk-button" @click="cancelEdit()">
+              {{ 'Cancel' | trans }}
+            </a>
+          </div>
+
         </td>
         <td class="uk-text-center">
           {{ topic.sermon_count }}

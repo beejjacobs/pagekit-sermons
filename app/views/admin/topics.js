@@ -7,6 +7,9 @@ module.exports = {
   data: function () {
     return _.merge({
       topics: false,
+      topic_editing: false,
+      new_topic: {id: null, name: ''},
+      form: false,
       config: {
         filter: this.$session.get('topics.filter', {order: 'name asc', limit: 25})
       },
@@ -44,10 +47,23 @@ module.exports = {
       return this.selected.indexOf(topic.id) != -1;
     },
 
+    newTopic: function () {
+      this.save(this.new_topic);
+    },
+
+    edit: function (topic) {
+      this.$set('topic_editing', topic);
+    },
+
+    cancelEdit: function () {
+      this.$set('topic_editing', false);
+    },
+
     save: function (topic) {
-      this.resource.save({id: topic.id}, {preacher: topic}).then(function () {
+      this.resource.save({id: topic.id}, {topic: topic}).then(function () {
         this.load();
-        this.$notify('Preacher saved.');
+        this.$notify('Topic saved.');
+        this.resetData();
       });
     },
 
@@ -75,6 +91,11 @@ module.exports = {
       return this.topics.filter(function (topic) {
         return this.selected.indexOf(topic.id) !== -1;
       }, this);
+    },
+
+    resetData: function () {
+      this.$set('topic_editing', false);
+      this.$set('new_topic', {id: null, name: ''});
     }
 
   }
