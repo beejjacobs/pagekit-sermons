@@ -57,7 +57,7 @@ class TopicApiController {
   /**
    * @Route("/", methods="POST")
    * @Route("/{id}", methods="POST", requirements={"id"="\d+"})
-   * @Request({"post": "array", "id": "int"}, csrf=true)
+   * @Request({"topic": "array", "id": "int"}, csrf=true)
    * @param $data
    * @param int $id
    * @return array
@@ -101,7 +101,7 @@ class TopicApiController {
 
   /**
    * @Route("/bulk", methods="POST")
-   * @Request({"posts": "array"}, csrf=true)
+   * @Request({"topics": "array"}, csrf=true)
    * @param array $topics
    * @return array
    */

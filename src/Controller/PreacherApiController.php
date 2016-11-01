@@ -57,7 +57,7 @@ class PreacherApiController {
   /**
    * @Route("/", methods="POST")
    * @Route("/{id}", methods="POST", requirements={"id"="\d+"})
-   * @Request({"post": "array", "id": "int"}, csrf=true)
+   * @Request({"preacher": "array", "id": "int"}, csrf=true)
    * @param $data
    * @param int $id
    * @return array
@@ -101,7 +101,7 @@ class PreacherApiController {
 
   /**
    * @Route("/bulk", methods="POST")
-   * @Request({"posts": "array"}, csrf=true)
+   * @Request({"preachers": "array"}, csrf=true)
    * @param array $preachers
    * @return array
    */
