@@ -13,7 +13,9 @@ return [
 
       if ($util->tableExists('@sermons_sermons') === false) {
         $util->createTable('@sermons_sermons', function ($table) {
-
+          /**
+           * @var Doctrine\DBAL\Schema\Table $table
+           */
           $table->addColumn('id', 'integer', ['unsigned' => true, 'length' => 10, 'autoincrement' => true]);
           $table->addColumn('status', 'smallint');
           $table->addColumn('title', 'string', ['length' => 255]);
@@ -33,7 +35,9 @@ return [
 
       if ($util->tableExists('@sermons_series') === false) {
         $util->createTable('@sermons_series', function ($table) {
-
+          /**
+           * @var Doctrine\DBAL\Schema\Table $table
+           */
           $table->addColumn('id', 'integer', ['unsigned' => true, 'length' => 10, 'autoincrement' => true]);
           $table->addColumn('name', 'string', ['length' => 255]);
           $table->addColumn('sermon_count', 'integer', ['default' => 0]);
@@ -44,7 +48,9 @@ return [
 
       if ($util->tableExists('@sermons_preachers') === false) {
         $util->createTable('@sermons_preachers', function ($table) {
-
+          /**
+           * @var Doctrine\DBAL\Schema\Table $table
+           */
           $table->addColumn('id', 'integer', ['unsigned' => true, 'length' => 10, 'autoincrement' => true]);
           $table->addColumn('name', 'string', ['length' => 255]);
           $table->addColumn('sermon_count', 'integer', ['default' => 0]);
@@ -55,7 +61,9 @@ return [
 
       if ($util->tableExists('@sermons_topics') === false) {
         $util->createTable('@sermons_topics', function ($table) {
-
+          /**
+           * @var Doctrine\DBAL\Schema\Table $table
+           */
           $table->addColumn('id', 'integer', ['unsigned' => true, 'length' => 10, 'autoincrement' => true]);
           $table->addColumn('name', 'string', ['length' => 255]);
           $table->addColumn('sermon_count', 'integer', ['default' => 0]);
@@ -66,7 +74,9 @@ return [
 
       if ($util->tableExists('@sermons_sermon_topics') === false) {
         $util->createTable('@sermons_sermon_topics', function ($table) {
-
+          /**
+           * @var Doctrine\DBAL\Schema\Table $table
+           */
           $table->addColumn('id', 'integer', ['unsigned' => true, 'length' => 10, 'autoincrement' => true]);
           $table->addColumn('sermon_id', 'integer', ['unsigned' => true, 'length' => 10, 'default' => 0]);
           $table->addColumn('topic_id', 'integer', ['unsigned' => true, 'length' => 10, 'default' => 0]);
@@ -77,7 +87,9 @@ return [
 
       if ($util->tableExists('@sermons_bible_books') === false) {
         $util->createTable('@sermons_bible_books', function ($table) {
-
+          /**
+           * @var Doctrine\DBAL\Schema\Table $table
+           */
           $table->addColumn('id', 'integer', ['unsigned' => true, 'length' => 10, 'autoincrement' => true]);
           $table->addColumn('name', 'string', ['length' => 255]);
           $table->addColumn('sermon_count', 'integer', ['default' => 0]);
@@ -92,7 +104,9 @@ return [
 
       if ($util->tableExists('@sermons_sermon_bible_books') === false) {
         $util->createTable('@sermons_sermon_bible_books', function ($table) {
-
+          /**
+           * @var Doctrine\DBAL\Schema\Table $table
+           */
           $table->addColumn('id', 'integer', ['unsigned' => true, 'length' => 10, 'autoincrement' => true]);
           $table->addColumn('sermon_id', 'integer', ['unsigned' => true, 'length' => 10, 'default' => 0]);
           $table->addColumn('bible_book_id', 'integer', ['unsigned' => true, 'length' => 10, 'default' => 0]);
@@ -105,6 +119,10 @@ return [
 
     },
     'uninstall' => function ($app) {
+      /**
+       * @var \Pagekit\Application $app
+       * @var \Pagekit\Database\Utility $util
+       */
       $util = $app['db']->getUtility();
 
       foreach (SermonsModule::DB_TABLES as $table) {

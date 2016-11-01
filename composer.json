@@ -15,5 +15,8 @@
   "extra": {
     "icon": "assets/menu-icon.svg",
     "scripts": "scripts.php"
+  },
+  "require-dev": {
+    "doctrine/dbal": "^2.5"
   }
 }
