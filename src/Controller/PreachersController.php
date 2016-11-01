@@ -18,8 +18,7 @@ class PreachersController {
         '$view' => [
             'title' => __('Preachers'),
             'name' => 'sermons/admin/preachers.php'
-        ],
-        'preachers' => Preacher::query()->related(Preacher::SERMONS)->get()
+        ]
     ];
   }
 }

@@ -13,8 +13,7 @@ class TopicsController {
         '$view' => [
             'title' => __('Topics'),
             'name' => 'sermons/admin/topics.php'
-        ],
-        'topics' => Topic::query()->related(Topic::SERMONS)->get()
+        ]
     ];
   }
 }

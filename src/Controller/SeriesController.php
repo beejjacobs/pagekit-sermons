@@ -20,8 +20,7 @@ class SeriesController {
         '$view' => [
             'title' => __('Sermon Series'),
             'name' => 'sermons/admin/series.php'
-        ],
-        'series' => Series::query()->related(Series::SERMONS)->get()
+        ]
     ];
   }
 }
