@@ -47,7 +47,7 @@ module.exports = {
       return this.selected.indexOf(topic.id) != -1;
     },
 
-    newTopic: function () {
+    create: function () {
       this.resource.save({topic: this.new_topic}).then(function () {
         this.load();
         this.$notify('Topic created.');

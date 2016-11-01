@@ -30,7 +30,7 @@
       </div>
     </div>
     <div class="uk-flex uk-flex-middle uk-flex-wrap" data-uk-margin>
-      <form id="new_topic" class="uk-form" v-validator="form" @submit.prevent="newTopic | valid" v-cloak>
+      <form id="new_topic" class="uk-form" v-validator="form" @submit.prevent="create | valid" v-cloak>
         <input type="text" name="name" v-model="new_topic.name" :placeholder="'New Topic' | trans" v-validate:required>
 
         <button class="uk-button uk-button-primary" type="submit">{{ 'Save' | trans }}</button>
