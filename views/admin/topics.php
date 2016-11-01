@@ -48,7 +48,7 @@
         <th class="pk-table-width-minimum">
           <input type="checkbox" v-check-all:selected.literal="input[name=id]" number>
         </th>
-        <th class="pk-table-min-width-200" v-order:title="config.filter.order">
+        <th class="pk-table-min-width-200" v-order:name="config.filter.order">
           {{ 'Title' | trans }}
         </th>
         <th class="pk-table-width-100 uk-text-center" v-order:sermon_count="config.filter.order">
