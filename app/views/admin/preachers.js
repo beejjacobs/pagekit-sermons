@@ -7,6 +7,9 @@ module.exports = {
   data: function () {
     return _.merge({
       preachers: false,
+      editing: false,
+      new_preacher: {id: null, name: ''},
+      form: false,
       config: {
         filter: this.$session.get('preachers.filter', {order: 'name asc', limit: 25})
       },
@@ -44,10 +47,27 @@ module.exports = {
       return this.selected.indexOf(preacher.id) != -1;
     },
 
+    create: function () {
+      this.resource.save({preacher: this.new_preacher}).then(function () {
+        this.load();
+        this.$notify('Preacher created.');
+        this.$set('new_preacher', {id: null, name: ''});
+      });
+    },
+
+    edit: function (preacher) {
+      this.$set('editing', preacher);
+    },
+
+    cancelEdit: function () {
+      this.$set('editing', false);
+    },
+
     save: function (preacher) {
       this.resource.save({id: preacher.id}, {preacher: preacher}).then(function () {
         this.load();
         this.$notify('Preacher saved.');
+        this.$set('editing', false);
       });
     },
 

@@ -31,7 +31,7 @@ class PreacherApiController {
       });
     }
 
-    if (!preg_match('/^(name)\s(asc|desc)$/i', $order, $order)) {
+    if (!preg_match('/^(name|sermon_count)\s(asc|desc)$/i', $order, $order)) {
       $order = [1 => 'name', 2 => 'asc'];
     }
 

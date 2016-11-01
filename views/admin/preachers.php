@@ -31,12 +31,14 @@
       </div>
 
     </div>
-    <div data-uk-margin>
+    <div class="uk-flex uk-flex-middle uk-flex-wrap" data-uk-margin>
+      <form id="new_preacher" class="uk-form" v-validator="form" @submit.prevent="create | valid" v-cloak>
+        <input type="text" name="name" v-model="new_preacher.name" :placeholder="'New Preacher' | trans" v-validate:required>
 
-      <a class="uk-button uk-button-primary" :href="$url.route('admin/sermons/preachers/edit')">
-        {{ 'Add Preacher' | trans }}
-      </a>
+        <button class="uk-button uk-button-primary" type="submit">{{ 'Save' | trans }}</button>
 
+        <p class="uk-form-help-block uk-text-danger" v-show="form.name.invalid">{{ 'Preacher cannot be blank.' | trans }}</p>
+      </form>
     </div>
   </div>
 
@@ -47,7 +49,7 @@
         <th class="pk-table-width-minimum">
           <input type="checkbox" v-check-all:selected.literal="input[name=id]" number>
         </th>
-        <th class="pk-table-min-width-200" v-order:title="config.filter.order">
+        <th class="pk-table-min-width-200" v-order:name="config.filter.order">
           {{ 'Name' | trans }}
         </th>
         <th class="pk-table-width-100 uk-text-center" v-order:sermon_count="config.filter.order">
@@ -61,7 +63,18 @@
           <input type="checkbox" name="id" :value="preacher.id">
         </td>
         <td>
-          <a :href="$url.route('admin/sermons/preachers/edit', { id: preacher.id })">{{ preacher.name }}</a>
+          <a v-show="editing.id !== preacher.id" @click="edit(preacher)">{{ preacher.name }}</a>
+
+          <div v-show="editing.id == preacher.id">
+            <input type="text" v-model="editing.name" debounce="300">
+
+            <a class="uk-button uk-button-primary" @click="save(editing)">
+              {{ 'Save' | trans }}
+            </a>
+            <a class="uk-button" @click="cancelEdit()">
+              {{ 'Cancel' | trans }}
+            </a>
+          </div>
         </td>
         <td class="uk-text-center">
           {{ preacher.sermon_count }}
