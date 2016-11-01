@@ -7,7 +7,7 @@ module.exports = {
   data: function () {
     return _.merge({
       topics: false,
-      topic_editing: false,
+      editing: false,
       new_topic: {id: null, name: ''},
       form: false,
       config: {
@@ -56,18 +56,18 @@ module.exports = {
     },
 
     edit: function (topic) {
-      this.$set('topic_editing', topic);
+      this.$set('editing', topic);
     },
 
     cancelEdit: function () {
-      this.$set('topic_editing', false);
+      this.$set('editing', false);
     },
 
     save: function (topic) {
       this.resource.save({id: topic.id}, {topic: topic}).then(function () {
         this.load();
         this.$notify('Topic saved.');
-        this.$set('topic_editing', false);
+        this.$set('editing', false);
       });
     },
 

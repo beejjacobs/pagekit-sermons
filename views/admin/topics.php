@@ -61,12 +61,12 @@
           <input type="checkbox" name="id" :value="topic.id">
         </td>
         <td>
-          <a v-show="topic_editing.id !== topic.id" @click="edit(topic)">{{ topic.name }}</a>
+          <a v-show="editing.id !== topic.id" @click="edit(topic)">{{ topic.name }}</a>
 
-          <div v-show="topic_editing.id == topic.id">
-            <input type="text" v-model="topic_editing.name" debounce="300">
+          <div v-show="editing.id == topic.id">
+            <input type="text" v-model="editing.name" debounce="300">
 
-            <a class="uk-button uk-button-primary" @click="save(topic_editing)">
+            <a class="uk-button uk-button-primary" @click="save(editing)">
               {{ 'Save' | trans }}
             </a>
             <a class="uk-button" @click="cancelEdit()">
