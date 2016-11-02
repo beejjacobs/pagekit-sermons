@@ -7,6 +7,9 @@ module.exports = {
   data: function () {
     return _.merge({
       all_series: false,
+      editing: false,
+      new_series: {id: null, name: ''},
+      form: false,
       config: {
         filter: this.$session.get('series.filter', {order: 'name asc', limit: 25})
       },
@@ -44,10 +47,27 @@ module.exports = {
       return this.selected.indexOf(series.id) != -1;
     },
 
+    create: function () {
+      this.resource.save({series: this.new_series}).then(function () {
+        this.load();
+        this.$notify('Series created.');
+        this.$set('new_series', {id: null, name: ''});
+      });
+    },
+
+    edit: function (series) {
+      this.$set('editing', series);
+    },
+
+    cancelEdit: function () {
+      this.$set('editing', false);
+    },
+
     save: function (series) {
       this.resource.save({id: series.id}, {series: series}).then(function () {
         this.load();
         this.$notify('Series saved.');
+        this.$set('editing', false);
       });
     },
 

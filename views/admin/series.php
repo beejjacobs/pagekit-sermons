@@ -27,12 +27,14 @@
       </div>
 
     </div>
-    <div data-uk-margin>
+    <div class="uk-flex uk-flex-middle uk-flex-wrap" data-uk-margin>
+      <form id="new_series" class="uk-form" v-validator="form" @submit.prevent="create | valid" v-cloak>
+        <input type="text" name="name" v-model="new_series.name" :placeholder="'New Series' | trans" v-validate:required>
 
-      <a class="uk-button uk-button-primary" :href="$url.route('admin/sermons/series/edit')">
-        {{ 'Add Series' | trans }}
-      </a>
+        <button class="uk-button uk-button-primary" type="submit">{{ 'Save' | trans }}</button>
 
+        <p class="uk-form-help-block uk-text-danger" v-show="form.name.invalid">{{ 'Series cannot be blank.' | trans }}</p>
+      </form>
     </div>
   </div>
 
@@ -43,7 +45,7 @@
         <th class="pk-table-width-minimum">
           <input type="checkbox" v-check-all:selected.literal="input[name=id]" number>
         </th>
-        <th class="pk-table-min-width-200" v-order:title="config.filter.order">
+        <th class="pk-table-min-width-200" v-order:name="config.filter.order">
           {{ 'Title' | trans }}
         </th>
         <th class="pk-table-width-100 uk-text-center" v-order:sermon_count="config.filter.order">
@@ -57,7 +59,18 @@
           <input type="checkbox" name="id" :value="series.id">
         </td>
         <td>
-          <a :href="$url.route('admin/sermons/series/edit', { id: series.id })">{{ series.name }}</a>
+          <a v-show="editing.id !== series.id" @click="edit(series)">{{ series.name }}</a>
+
+          <div v-show="editing.id == series.id">
+            <input type="text" v-model="editing.name" debounce="300">
+
+            <a class="uk-button uk-button-primary" @click="save(editing)">
+              {{ 'Save' | trans }}
+            </a>
+            <a class="uk-button" @click="cancelEdit()">
+              {{ 'Cancel' | trans }}
+            </a>
+          </div>
         </td>
         <td class="uk-text-center">
           {{ series.sermon_count }}
