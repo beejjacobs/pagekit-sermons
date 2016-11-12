@@ -8,6 +8,7 @@ use Pagekit\Application;
 /**
  * Class TopicApiController
  * @package beejjacobs\Sermons\Controller
+ * @Access("sermons: manage topics")
  * @Route("topic", name="topic")
  */
 class TopicApiController {
