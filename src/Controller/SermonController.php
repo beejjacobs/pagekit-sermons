@@ -33,7 +33,7 @@ class SermonController {
     $toReturn = [
         '$view' => [
             'title' => __('Edit Sermon'),
-            'name' => 'sermons/admin/edit.php'
+            'name' => 'sermons/admin/sermon-edit.php'
         ]
     ];
     if ($id == 0) {

@@ -3,7 +3,7 @@ module.exports = [
   {
     entry: {
       "settings": "./app/views/admin/settings",
-      "sermons": "./app/views/admin/sermons",
+      "sermon-index": "./app/views/admin/sermon-index",
       "series": "./app/views/admin/series",
       "preachers": "./app/views/admin/preachers",
       "topics": "./app/views/admin/topics"

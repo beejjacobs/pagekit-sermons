@@ -1,4 +1,4 @@
-<?php $view->script('sermons', 'sermons:app/bundle/sermons.js', 'vue') ?>
+<?php $view->script('sermon-index', 'sermons:app/bundle/sermon-index.js', 'vue') ?>
 
 <div id="sermons" class="uk-form" v-cloak>
 

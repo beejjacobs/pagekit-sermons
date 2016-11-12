@@ -18,7 +18,7 @@ class SermonsController {
     return [
         '$view' => [
             'title' => __('Sermons'),
-            'name' => 'sermons/admin/sermons.php'
+            'name' => 'sermons/admin/sermon-index.php'
         ],
         '$data' => [
             'statuses' => Sermon::getStatuses(),
