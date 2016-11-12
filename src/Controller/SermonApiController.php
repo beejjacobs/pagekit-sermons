@@ -21,6 +21,12 @@ class SermonApiController {
    * @return mixed
    */
   public function indexAction($filter = [], $page = 0) {
+    /**
+     * @var string $status
+     * @var string $search
+     * @var string $order
+     * @var string $limit
+     */
     $query = Sermon::query();
     $filter = array_merge(array_fill_keys(['status', 'search', 'preacher', 'order', 'limit'], ''), $filter);
 

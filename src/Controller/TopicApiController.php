@@ -21,6 +21,11 @@ class TopicApiController {
    * @return mixed
    */
   public function indexAction($filter = [], $page = 0) {
+    /**
+     * @var string $search
+     * @var string $order
+     * @var string $limit
+     */
     $query = Topic::query();
     $filter = array_merge(array_fill_keys(['search', 'order', 'limit'], ''), $filter);
 
