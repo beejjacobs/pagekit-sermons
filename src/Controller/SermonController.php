@@ -53,6 +53,9 @@ class SermonController {
         Application::abort(403, __('Insufficient User Rights.'));
       }
 
+      $sermon->bible_books = array_values($sermon->bible_books);
+      $sermon->topics = array_values($sermon->topics);
+
       return [
           '$view' => [
               'title' => $id ? __('Edit Sermon') : __('Add Sermon'),
@@ -61,10 +64,10 @@ class SermonController {
           '$data' => [
               'sermon'     => $sermon,
               'statuses' => Sermon::getStatuses(),
-              'preachers' => Preacher::findAll(),
-              'series' => Series::findAll(),
-              'topics' => Topic::findAll(),
-              'bible_books' => BibleBook::findAll()
+              'preachers' => array_values(Preacher::findAll()),
+              'series' => array_values(Series::findAll()),
+              'topics' => array_values(Topic::findAll()),
+              'bible_books' => array_values(BibleBook::findAll())
           ]
       ];
 

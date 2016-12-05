@@ -51,6 +51,12 @@
           </div>
         </div>
         <div class="uk-form-row">
+          <span class="uk-form-label">{{ 'Date' | trans }}</span>
+          <div class="uk-form-controls">
+            <input-date :datetime.sync="sermon.date"></input-date>
+          </div>
+        </div>
+        <div class="uk-form-row">
           <label for="form-preacher" class="uk-form-label">{{ 'Preacher' | trans }}</label>
           <div class="uk-form-controls">
             <select id="form-preacher" class="uk-width-1-1" v-model="sermon.preacher_id">
@@ -67,34 +73,29 @@
           </div>
         </div>
         <div class="uk-form-row">
-          <label for="form-topic" class="uk-form-label">{{ 'Topics' | trans }}</label>
-          <div class="uk-form-controls">
-            <select id="form-topic" class="uk-width-1-1" v-model="sermon.topics">
-              <option v-for="topic in data.topics" :value="topic.id">{{topic.name}}</option>
-            </select>
-          </div>
-        </div>
-        <div class="uk-form-row">
-          <label for="form-bible_book" class="uk-form-label">{{ 'Bible Book' | trans }}</label>
-          <div class="uk-form-controls">
-            <select id="form-bible_book" class="uk-width-1-1" v-model="sermon.bible_books">
-              <option v-for="bible_book in data.bible_books" :value="bible_book.id">{{bible_book.name}}</option>
-            </select>
-          </div>
-        </div>
-        <div class="uk-form-row">
           <label for="form-bible_passage" class="uk-form-label">{{ 'Bible Passage' | trans }}</label>
           <div class="uk-form-controls">
             <input id="form-bible_passage" class="uk-width-1-1" type="text" v-model="sermon.bible_passage">
           </div>
         </div>
         <div class="uk-form-row">
-          <span class="uk-form-label">{{ 'Date' | trans }}</span>
+          <label for="form-topic" class="uk-form-label">{{ 'Topics' | trans }}</label>
+          <div v-for="topic in sermon.topics">{{topic.name}}</div>
           <div class="uk-form-controls">
-            <input-date :datetime.sync="sermon.date"></input-date>
+            <select id="form-topic" class="uk-width-1-1" v-model="selected.topic">
+              <option v-for="topic in data.topics" :value="topic">{{topic.name}}</option>
+            </select>
           </div>
         </div>
-
+        <div class="uk-form-row">
+          <label for="form-bible_book" class="uk-form-label">{{ 'Books of the Bible' | trans }}</label>
+          <div v-for="bible_book in sermon.bible_books">{{bible_book.name}}</div>
+          <div class="uk-form-controls">
+            <select id="form-bible_book" class="uk-width-1-1" v-model="selected.bible_book">
+              <option v-for="bible_book in data.bible_books" :value="bible_book">{{bible_book.name}}</option>
+            </select>
+          </div>
+        </div>
       </div>
 
     </div>
