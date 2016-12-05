@@ -1,7 +1,12 @@
 <?php
 
 namespace beejjacobs\Sermons\Controller;
+use beejjacobs\Sermons\Model\BibleBook;
+use beejjacobs\Sermons\Model\Preacher;
+use beejjacobs\Sermons\Model\Series;
 use beejjacobs\Sermons\Model\Sermon;
+use beejjacobs\Sermons\Model\Topic;
+use Pagekit\Application;
 
 /**
  * Class SermonController
@@ -30,26 +35,44 @@ class SermonController {
    * @return array
    */
   public function editAction($id = 0) {
-    $toReturn = [
-        '$view' => [
-            'title' => __('Edit Sermon'),
-            'name' => 'sermons/admin/sermon-edit.php'
-        ]
-    ];
-    if ($id == 0) {
-      $toReturn['error'] = __('Sermon id not set');
-      return $toReturn;
+    try {
+
+      if (!$sermon = Sermon::where(compact('id'))->related(Sermon::RELATED)->first()) {
+
+        if ($id) {
+          Application::abort(404, __('Invalid sermon id.'));
+        }
+
+        $module = Application::module('sermons');
+
+        $sermon = Sermon::create([]);
+      }
+
+      $user = Application::user();
+      if(!$user->hasAccess('sermons: manage sermons')) {
+        Application::abort(403, __('Insufficient User Rights.'));
+      }
+
+      return [
+          '$view' => [
+              'title' => $id ? __('Edit Sermon') : __('Add Sermon'),
+              'name'  => 'sermons/admin/sermon-edit.php'
+          ],
+          '$data' => [
+              'sermon'     => $sermon,
+              'statuses' => Sermon::getStatuses(),
+              'preachers' => Preacher::findAll(),
+              'series' => Series::findAll(),
+              'topics' => Topic::findAll(),
+              'bible_books' => BibleBook::findAll()
+          ]
+      ];
+
+    } catch (\Exception $e) {
+
+      Application::message()->error($e->getMessage());
+
+      return Application::redirect('@sermons/sermon');
     }
-
-    $sermon = Sermon::query()->related(Sermon::SERMON_SERIES)->where('id = ?', [$id])->first();
-
-    if($sermon == null) {
-      $toReturn['error'] = __('Sermon not found');
-      return $toReturn;
-    }
-
-    $toReturn['sermon'] = $sermon;
-
-    return $toReturn;
   }
 }
