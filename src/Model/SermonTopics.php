@@ -30,11 +30,7 @@ class SermonTopics implements \JsonSerializable {
   public $topic_id;
 
   public function jsonSerialize() {
-    $data = [];
-    if ($this->sermons) {
-      $data['sermons'] = $this->sermons;
-    }
-    return $this->toArray($data);
+    return $this->toArray();
   }
 
   /**
@@ -43,7 +39,7 @@ class SermonTopics implements \JsonSerializable {
    * @return bool
    */
   public static function checkLinkExists($sermon_id, $topic_id) {
-    $count = SermonTopics::where(['sermon_id = ? AND topic_id = ?'], [$sermon_id, $topic_id])->query()->count();
+    $count = SermonTopics::where(['sermon_id = ? AND topic_id = ?'], [$sermon_id, $topic_id])->count();
 
     return $count > 0;
   }

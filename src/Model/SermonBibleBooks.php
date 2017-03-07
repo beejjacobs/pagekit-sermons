@@ -30,11 +30,7 @@ class SermonBibleBooks implements \JsonSerializable {
   public $bible_book_id;
 
   public function jsonSerialize() {
-    $data = [];
-    if ($this->sermons) {
-      $data['sermons'] = $this->sermons;
-    }
-    return $this->toArray($data);
+    return $this->toArray();
   }
 
   /**
@@ -43,7 +39,7 @@ class SermonBibleBooks implements \JsonSerializable {
    * @return bool
    */
   public static function checkLinkExists($sermon_id, $bible_book_id) {
-    $count = SermonBibleBooks::where(['sermon_id = ? AND bible_book_id = ?'], [$sermon_id, $bible_book_id])->query()->count();
+    $count = SermonBibleBooks::where(['sermon_id = ? AND bible_book_id = ?'], [$sermon_id, $bible_book_id])->count();
 
     return $count > 0;
   }
