@@ -113,9 +113,7 @@ class SermonApiController {
     //Create any relationships to Bible books
     if (is_array($data['bible_books'])) {
       foreach ($data['bible_books'] as $bible_book) {
-        error_log('Bible book:' . $bible_book['id'] . ' sermon:' . $sermon->id . PHP_EOL, 3, './error.log');
         if (!SermonBibleBooks::checkLinkExists($sermon->id, $bible_book['id'])) {
-          error_log('no link' . PHP_EOL, 3, './error.log');
           SermonBibleBooks::create(['sermon_id' => $sermon->id, 'bible_book_id' => $bible_book['id']])->save();
         }
       }
@@ -145,6 +143,7 @@ class SermonApiController {
       }
 
       $sermon->delete();
+      //todo: clean up sermon topics and bible books
     }
 
     return ['message' => 'success'];
