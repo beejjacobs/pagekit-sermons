@@ -91,29 +91,39 @@ class SermonApiController {
     $sermon->save($data);
 
     //Create any relationships to topics
-    foreach ($data->topics as $topic) {
-      if (!SermonTopics::checkLinkExists($sermon->id, $topic->id)) {
-        SermonTopics::create(['sermon_id' => $sermon->id, 'topic_id' => $topic->id])->save();
+    if (is_array($data['topics'])) {
+      foreach ($data['topics'] as $topic) {
+        if (!SermonTopics::checkLinkExists($sermon->id, $topic['id'])) {
+          SermonTopics::create(['sermon_id' => $sermon->id, 'topic_id' => $topic['id']])->save();
+        }
       }
     }
 
+    $getIds = function ($obj) {
+      return $obj['id'];
+    };
+
     //Remove any unneeded relationships
     foreach (SermonTopics::forSermon($sermon->id) as $topic) {
-      if (!in_array($topic->topic_id, $data->topics)) {
+      if (!in_array($topic->topic_id, array_map($getIds, $data['topics']))) {
         $topic->delete();
       }
     }
 
     //Create any relationships to Bible books
-    foreach ($data->bible_books as $bible_book) {
-      if (!SermonBibleBooks::checkLinkExists($sermon->id, $bible_book->id)) {
-        SermonBibleBooks::create(['sermon_id' => $sermon->id, 'bible_book_id' => $bible_book->id])->save();
+    if (is_array($data['bible_books'])) {
+      foreach ($data['bible_books'] as $bible_book) {
+        error_log('Bible book:' . $bible_book['id'] . ' sermon:' . $sermon->id . PHP_EOL, 3, './error.log');
+        if (!SermonBibleBooks::checkLinkExists($sermon->id, $bible_book['id'])) {
+          error_log('no link' . PHP_EOL, 3, './error.log');
+          SermonBibleBooks::create(['sermon_id' => $sermon->id, 'bible_book_id' => $bible_book['id']])->save();
+        }
       }
     }
 
     //Remove any unneeded relationships
     foreach (SermonBibleBooks::forSermon($sermon->id) as $bible_book) {
-      if (!in_array($bible_book->bible_book_id, $data->bible_books)) {
+      if (!in_array($bible_book->bible_book_id,  array_map($getIds, $data['bible_books']))) {
         $bible_book->delete();
       }
     }
