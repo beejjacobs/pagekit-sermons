@@ -3,6 +3,7 @@ namespace beejjacobs\Sermons\Controller;
 
 
 use beejjacobs\Sermons\Model\Sermon;
+use beejjacobs\Sermons\Model\SermonBibleBooks;
 use beejjacobs\Sermons\Model\SermonTopics;
 use Pagekit\Application;
 
@@ -89,9 +90,32 @@ class SermonApiController {
 
     $sermon->save($data);
 
+    //Create any relationships to topics
     foreach ($data->topics as $topic) {
-      //todo: what if the link exists?
-      SermonTopics::create(['topic_id' => $topic->id, 'sermon_id' => $sermon->id])->save();
+      if (!SermonTopics::checkLinkExists($sermon->id, $topic->id)) {
+        SermonTopics::create(['sermon_id' => $sermon->id, 'topic_id' => $topic->id])->save();
+      }
+    }
+
+    //Remove any unneeded relationships
+    foreach (SermonTopics::forSermon($sermon->id) as $topic) {
+      if (!in_array($topic->topic_id, $data->topics)) {
+        $topic->delete();
+      }
+    }
+
+    //Create any relationships to Bible books
+    foreach ($data->bible_books as $bible_book) {
+      if (!SermonBibleBooks::checkLinkExists($sermon->id, $bible_book->id)) {
+        SermonBibleBooks::create(['sermon_id' => $sermon->id, 'bible_book_id' => $bible_book->id])->save();
+      }
+    }
+
+    //Remove any unneeded relationships
+    foreach (SermonBibleBooks::forSermon($sermon->id) as $bible_book) {
+      if (!in_array($bible_book->bible_book_id, $data->bible_books)) {
+        $bible_book->delete();
+      }
     }
 
     return ['message' => 'success', 'sermon' => $sermon];
