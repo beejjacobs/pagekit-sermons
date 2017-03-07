@@ -3,6 +3,7 @@ namespace beejjacobs\Sermons\Controller;
 
 
 use beejjacobs\Sermons\Model\Sermon;
+use beejjacobs\Sermons\Model\SermonTopics;
 use Pagekit\Application;
 
 /**
@@ -33,7 +34,7 @@ class SermonApiController {
     extract($filter, EXTR_SKIP);
 
     if (is_numeric($status)) {
-      $query->where(['status' => (int) $status]);
+      $query->where(['status' => (int)$status]);
     }
 
     if ($search) {
@@ -46,10 +47,10 @@ class SermonApiController {
       $order = [1 => 'date', 2 => 'desc'];
     }
 
-    $limit = (int) $limit ?: Application::module('sermons')->config('sermons.sermons_per_page');
+    $limit = (int)$limit ?: Application::module('sermons')->config('sermons.sermons_per_page');
     $count = $query->count();
     $pages = ceil($count / $limit);
-    $page  = max(0, min($pages - 1, $page));
+    $page = max(0, min($pages - 1, $page));
 
     $sermons = array_values($query->offset($page * $limit)->related(Sermon::RELATED)->limit($limit)->orderBy($order[1], $order[2])->get());
 
@@ -88,6 +89,11 @@ class SermonApiController {
 
     $sermon->save($data);
 
+    foreach ($data->topics as $topic) {
+      //todo: what if the link exists?
+      SermonTopics::create(['topic_id' => $topic->id, 'sermon_id' => $sermon->id])->save();
+    }
+
     return ['message' => 'success', 'sermon' => $sermon];
   }
 
@@ -118,15 +124,15 @@ class SermonApiController {
    */
   public function copyAction($ids = []) {
     foreach ($ids as $id) {
-      if ($sermon = Sermon::find((int) $id)) {
-        if(!Application::user()->hasAccess('sermons: manage sermons')) {
+      if ($sermon = Sermon::find((int)$id)) {
+        if (!Application::user()->hasAccess('sermons: manage sermons')) {
           continue;
         }
 
         $sermon = clone $sermon;
         $sermon->id = null;
         $sermon->status = Sermon::STATUS_UNPUBLISHED;
-        $sermon->title = $sermon->title.' - '.__('Copy');
+        $sermon->title = $sermon->title . ' - ' . __('Copy');
         $sermon->date = new \DateTime();
         $sermon->save();
       }
