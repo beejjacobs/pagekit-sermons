@@ -61,6 +61,9 @@ window.Sermon = {
         });
       }
       if (!exists) {
+        if (!this.sermon.topics) {
+          Vue.set(this.sermon, 'topics', []);
+        }
         this.sermon.topics.push(this.selected.topic);
       }
 
@@ -80,6 +83,9 @@ window.Sermon = {
         });
       }
       if (!exists) {
+        if (!this.sermon.bible_books) {
+          Vue.set(this.sermon, 'bible_books', []);
+        }
         this.sermon.bible_books.push(this.selected.bible_book);
       }
 
