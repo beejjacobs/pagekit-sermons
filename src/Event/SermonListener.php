@@ -20,6 +20,7 @@ class SermonListener implements EventSubscriberInterface {
 
   public function subscribe() {
     return [
+        'model.sermon.created' => 'onSermonChange',
         'model.sermon.saved' => 'onSermonChange',
         'model.sermon.deleted' => 'onSermonChange'
     ];

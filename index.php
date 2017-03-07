@@ -1,6 +1,8 @@
 <?php
 
+use beejjacobs\Sermons\Event\SermonBibleBooksListener;
 use beejjacobs\Sermons\Event\SermonListener;
+use beejjacobs\Sermons\Event\SermonTopicsListener;
 use Pagekit\Application;
 
 return [
@@ -125,9 +127,9 @@ return [
           /**
            * @var Application $app
            */
-          $app->subscribe(
-              new SermonListener()
-          );
+          $app->subscribe(new SermonListener());
+          $app->subscribe(new SermonTopicsListener());
+          $app->subscribe(new SermonBibleBooksListener());
         }
     ]
 ];
