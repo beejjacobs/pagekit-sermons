@@ -20,23 +20,33 @@ window.Sermon = {
     var data = this.data;
 
     //todo: this doesn't seem to fully work
-    this.sermon.topics.forEach(function (topic) {
-      var index = data.topics.findIndex(function (element) {
-        return element.id == topic.id;
+    if (this.sermon.topics) {
+      this.sermon.topics.forEach(function (topic) {
+        var index = data.topics.findIndex(function (element) {
+          return element.id == topic.id;
+        });
+        if (index) {
+          data.topics.splice(index, 1);
+        }
       });
-      if (index) {
-        data.topics.splice(index, 1);
-      }
-    });
+    } else {
+      //make sure Vue picks up the change
+      Vue.set(this.sermon, 'topics', []);
+    }
 
-    this.sermon.bible_books.forEach(function (bible_book) {
-      var index = data.bible_books.findIndex(function (element) {
-        return element.id == bible_book.id;
+    if (this.sermon.bible_books) {
+      this.sermon.bible_books.forEach(function (bible_book) {
+        var index = data.bible_books.findIndex(function (element) {
+          return element.id == bible_book.id;
+        });
+        if (index) {
+          data.bible_books.splice(index, 1);
+        }
       });
-      if (index) {
-        data.bible_books.splice(index, 1);
-      }
-    });
+    } else {
+      //make sure Vue picks up the change
+      Vue.set(this.sermon, 'bible_books', []);
+    }
 
 
   },
@@ -44,9 +54,12 @@ window.Sermon = {
   watch: {
     'selected.topic': function () {
       var id = this.selected.topic.id;
-      var exists = this.sermon.topics.find(function (topic) {
-        return topic.id == id;
-      });
+      var exists = false;
+      if (this.sermon.topics) {
+        exists = this.sermon.topics.find(function (topic) {
+          return topic.id == id;
+        });
+      }
       if (!exists) {
         this.sermon.topics.push(this.selected.topic);
       }
@@ -60,9 +73,12 @@ window.Sermon = {
     },
     'selected.bible_book': function () {
       var id = this.selected.bible_book.id;
-      var exists = this.sermon.bible_books.find(function (bible_book) {
-        return bible_book.id == id;
-      });
+      var exists = false;
+      if (this.sermon.bible_books) {
+        exists = this.sermon.bible_books.find(function (bible_book) {
+          return bible_book.id == id;
+        });
+      }
       if (!exists) {
         this.sermon.bible_books.push(this.selected.bible_book);
       }
