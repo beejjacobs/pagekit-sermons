@@ -81,7 +81,7 @@
         <div class="uk-form-row">
           <label for="form-topic" class="uk-form-label">{{ 'Topics' | trans }}</label>
           <div v-for="topic in sermon.topics">
-            <button type="button" v-on:click="removeTopic(topic)">x</button>
+            <img src="packages/beejjacobs/sermons/assets/ic_remove_circle_outline_black_24px.svg" width="20" v-on:click="removeTopic(topic)">
             {{topic.name}}
           </div>
           <div class="uk-form-controls">
@@ -93,7 +93,7 @@
         <div class="uk-form-row">
           <label for="form-bible_book" class="uk-form-label">{{ 'Books of the Bible' | trans }}</label>
           <div v-for="bible_book in sermon.bible_books">
-            <button type="button" v-on:click="removeBibleBook(bible_book)">x</button>
+            <img src="packages/beejjacobs/sermons/assets/ic_remove_circle_outline_black_24px.svg" width="20" v-on:click="removeBibleBook(bible_book)">
             {{bible_book.name}}
           </div>
           <div class="uk-form-controls">
