@@ -19,13 +19,12 @@ window.Sermon = {
 
     var data = this.data;
 
-    //todo: this doesn't seem to fully work
     if (this.sermon.topics) {
       this.sermon.topics.forEach(function (topic) {
         var index = data.topics.findIndex(function (element) {
           return element.id == topic.id;
         });
-        if (index) {
+        if (index != -1) {
           data.topics.splice(index, 1);
         }
       });
@@ -39,7 +38,7 @@ window.Sermon = {
         var index = data.bible_books.findIndex(function (element) {
           return element.id == bible_book.id;
         });
-        if (index) {
+        if (index != -1) {
           data.bible_books.splice(index, 1);
         }
       });
@@ -53,6 +52,9 @@ window.Sermon = {
 
   watch: {
     'selected.topic': function () {
+      if(!this.selected.topic.id) {
+        return;
+      }
       var id = this.selected.topic.id;
       var exists = false;
       if (this.sermon.topics) {
@@ -70,11 +72,15 @@ window.Sermon = {
       var index = this.data.topics.findIndex(function (topic) {
         return topic.id == id;
       });
-      if (index) {
+      if (index != -1) {
         this.data.topics.splice(index, 1);
       }
+      this.selected.topic = {};
     },
     'selected.bible_book': function () {
+      if(!this.selected.bible_book.id) {
+        return;
+      }
       var id = this.selected.bible_book.id;
       var exists = false;
       if (this.sermon.bible_books) {
@@ -92,9 +98,10 @@ window.Sermon = {
       var index = this.data.bible_books.findIndex(function (bible_book) {
         return bible_book.id == id;
       });
-      if (index) {
+      if (index != -1) {
         this.data.bible_books.splice(index, 1);
       }
+      this.selected.bible_book = {};
     }
   },
 
@@ -120,6 +127,46 @@ window.Sermon = {
       }, function (res) {
         this.$notify(res.data, 'danger');
       });
+    },
+
+    removeTopic: function (topic) {
+      if (this.sermon.topics) {
+        var index = this.sermon.topics.findIndex(function (_topic) {
+          return _topic.id == topic.id;
+        });
+
+        if (index !== -1) {
+          this.sermon.topics.splice(index, 1);
+
+          var exists = this.data.topics.find(function (_topic) {
+            return _topic.id == topic.id;
+          });
+          if (!exists) {
+            this.data.topics.push(topic);
+            this.selected.topic = {};
+          }
+        }
+      }
+    },
+
+    removeBibleBook: function (bible_book) {
+      if (this.sermon.bible_books) {
+        var index = this.sermon.bible_books.findIndex(function (_bible_book) {
+          return _bible_book.id == bible_book.id;
+        });
+
+        if (index !== -1) {
+          this.sermon.bible_books.splice(index, 1);
+
+          var exists = this.data.bible_books.find(function (_bible_book) {
+            return _bible_book.id == bible_book.id;
+          });
+          if (!exists) {
+            this.data.bible_books.push(bible_book);
+            this.selected.bible_book = {};
+          }
+        }
+      }
     }
 
   }

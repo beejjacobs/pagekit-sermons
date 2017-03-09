@@ -80,7 +80,10 @@
         </div>
         <div class="uk-form-row">
           <label for="form-topic" class="uk-form-label">{{ 'Topics' | trans }}</label>
-          <div v-for="topic in sermon.topics">{{topic.name}}</div>
+          <div v-for="topic in sermon.topics">
+            <button type="button" v-on:click="removeTopic(topic)">x</button>
+            {{topic.name}}
+          </div>
           <div class="uk-form-controls">
             <select id="form-topic" class="uk-width-1-1" v-model="selected.topic">
               <option v-for="topic in data.topics" :value="topic">{{topic.name}}</option>
@@ -89,7 +92,10 @@
         </div>
         <div class="uk-form-row">
           <label for="form-bible_book" class="uk-form-label">{{ 'Books of the Bible' | trans }}</label>
-          <div v-for="bible_book in sermon.bible_books">{{bible_book.name}}</div>
+          <div v-for="bible_book in sermon.bible_books">
+            <button type="button" v-on:click="removeBibleBook(bible_book)">x</button>
+            {{bible_book.name}}
+          </div>
           <div class="uk-form-controls">
             <select id="form-bible_book" class="uk-width-1-1" v-model="selected.bible_book">
               <option v-for="bible_book in data.bible_books" :value="bible_book">{{bible_book.name}}</option>
