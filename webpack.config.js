@@ -2,12 +2,13 @@ module.exports = [
 
   {
     entry: {
-      "settings": "./app/views/admin/settings",
-      "sermon-index": "./app/views/admin/sermon-index",
-      "sermon-edit": "./app/views/admin/sermon-edit",
-      "series": "./app/views/admin/series",
-      "preachers": "./app/views/admin/preachers",
-      "topics": "./app/views/admin/topics"
+      "input-date-am-pm": "./app/components/input-date-am-pm.vue",
+      "settings": "./app/views/admin/settings.js",
+      "sermon-index": "./app/views/admin/sermon-index.js",
+      "sermon-edit": "./app/views/admin/sermon-edit.js",
+      "series": "./app/views/admin/series.js",
+      "preachers": "./app/views/admin/preachers.js",
+      "topics": "./app/views/admin/topics.js"
     },
     output: {
       filename: "./app/bundle/[name].js"

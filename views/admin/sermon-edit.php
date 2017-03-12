@@ -1,4 +1,5 @@
 <?php $view->script('sermon-edit', 'sermons:app/bundle/sermon-edit.js', ['vue', 'editor']) ?>
+<?php $view->script('input-date-am-pm', 'sermons:app/bundle/input-date-am-pm.js', ['vue', 'uikit']) ?>
 
 <form id="sermon" class="uk-form" v-validator="form" @submit.prevent="save | valid" v-cloak>
 
@@ -53,7 +54,7 @@
         <div class="uk-form-row">
           <span class="uk-form-label">{{ 'Date' | trans }}</span>
           <div class="uk-form-controls">
-            <input-date :datetime.sync="sermon.date"></input-date>
+            <input-date-am-pm :datetime.sync="sermon.date"></input-date-am-pm>
           </div>
         </div>
         <div class="uk-form-row">
