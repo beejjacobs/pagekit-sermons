@@ -1,5 +1,6 @@
 <?php $view->script('sermon-edit', 'sermons:app/bundle/sermon-edit.js', ['vue', 'editor']) ?>
 <?php $view->script('input-date-am-pm', 'sermons:app/bundle/input-date-am-pm.js', ['vue', 'uikit']) ?>
+<?php $view->script('input-audio', 'sermons:app/bundle/input-audio.js', ['vue', 'uikit']) ?>
 
 <form id="sermon" class="uk-form" v-validator="form" @submit.prevent="save | valid" v-cloak>
 
@@ -26,6 +27,12 @@
         <p class="uk-form-help-block uk-text-danger" v-show="form.title.invalid">{{ 'Title cannot be blank.' | trans }}</p>
       </div>
       <div class="uk-form-row">
+        <label for="form-image" class="uk-form-label">{{ 'Audio' | trans }}</label>
+        <div class="uk-form-controls">
+          <input-audio :source.sync="sermon.mp3_source" class="pk-image-max-height"></input-audio>
+        </div>
+      </div>
+      <div class="uk-form-row">
         <textarea class="uk-width-1-1 uk-form-large" id="sermon-description" v-model="sermon.description" :placeholder="'Sermon Description' | trans"></textarea>
       </div>
       <div class="uk-form-row">
@@ -36,7 +43,6 @@
     <div class="pk-width-sidebar">
 
       <div class="uk-panel">
-
         <div class="uk-form-row">
           <label for="form-image" class="uk-form-label">{{ 'Image' | trans }}</label>
           <div class="uk-form-controls">
