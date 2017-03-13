@@ -123,6 +123,24 @@ class Sermon implements \JsonSerializable {
   }
 
   /**
+   * @Saving
+   * @param $event
+   * @param Sermon $sermon
+   */
+  public static function saving($event, Sermon $sermon) {
+    $i  = 2;
+    $id = $sermon->id;
+
+    while (self::where('slug = ?', [$sermon->slug])->where(function ($query) use ($id) {
+      if ($id) {
+        $query->where('id <> ?', [$id]);
+      }
+    })->first()) {
+      $sermon->slug = preg_replace('/-\d+$/', '', $sermon->slug).'-'.$i++;
+    }
+  }
+
+  /**
    * Get the current status as display text
    * @return mixed
    */

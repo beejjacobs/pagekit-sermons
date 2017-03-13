@@ -88,6 +88,10 @@ class SermonApiController {
       Application::abort(400, __('Access denied.'));
     }
 
+    if (!$data['slug'] = Application::filter($data['slug'] ?: $data['title'], 'slugify')) {
+      Application::abort(400, __('Invalid slug.'));
+    }
+
     $sermon->save($data);
 
     //Create any relationships to topics
