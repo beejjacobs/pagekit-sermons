@@ -1,2 +1,2 @@
 # pagekit-sermons
-Sermon package for Pagekit
+Sermon package for [Pagekit](https://pagekit.com/)
