@@ -13,7 +13,7 @@
     </div>
     <div data-uk-margin>
 
-      <a class="uk-button uk-margin-small-right" :href="$url.route('admin/sermons/sermon')">{{ sermon.id ? 'Close' : 'Cancel' | trans }}</a>
+      <a class="uk-button uk-margin-small-right" :href="$url.route('admin/sermons')">{{ sermon.id ? 'Close' : 'Cancel' | trans }}</a>
       <button class="uk-button uk-button-primary" type="submit">{{ 'Save' | trans }}</button>
 
     </div>
@@ -23,19 +23,22 @@
     <div class="pk-width-content">
 
       <div class="uk-form-row">
+        <label for="title" class="uk-form-label">{{ 'Title' | trans }}</label>
         <input class="uk-width-1-1 uk-form-large" type="text" name="title" :placeholder="'Enter Title' | trans" v-model="sermon.title" v-validate:required>
         <p class="uk-form-help-block uk-text-danger" v-show="form.title.invalid">{{ 'Title cannot be blank.' | trans }}</p>
       </div>
       <div class="uk-form-row">
-        <label for="form-image" class="uk-form-label">{{ 'Audio' | trans }}</label>
+        <label class="uk-form-label">{{ 'Audio' | trans }}</label>
         <div class="uk-form-controls">
           <input-audio :source.sync="sermon.mp3_source" class="pk-image-max-height"></input-audio>
         </div>
       </div>
       <div class="uk-form-row">
-        <textarea class="uk-width-1-1 uk-form-large" id="sermon-description" v-model="sermon.description" :placeholder="'Sermon Description' | trans"></textarea>
+        <label for="sermon-description" class="uk-form-label">{{ 'Description' | trans }}</label>
+        <textarea class="uk-width-1-1 uk-form-large" id="sermon-description" v-model="sermon.description"></textarea>
       </div>
       <div class="uk-form-row">
+        <label for="sermon-sermon_notes" class="uk-form-label">{{ 'Notes' | trans }}</label>
         <v-editor id="sermon-sermon_notes" :value.sync="sermon.sermon_notes"></v-editor>
       </div>
 
