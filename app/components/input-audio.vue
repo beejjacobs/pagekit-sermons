@@ -5,7 +5,7 @@
   </a>
 
   <div v-else>
-    <audio controls class="uk-width-5-6" style="height:40px" :src="audio">
+    <audio controls class="uk-width-5-6" style="min-height:40px" :src="audio">
       Your browser does not support the <code>audio</code> element.
     </audio>
 
