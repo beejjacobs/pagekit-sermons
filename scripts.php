@@ -27,7 +27,7 @@ return [
           $table->addColumn('description', 'text');
           $table->addColumn('sermon_series_id', 'integer', ['unsigned' => true, 'length' => 10]);
           $table->addColumn('sermon_notes', 'text');
-          $table->addColumn('feature_image', 'string', ['length' => 255]);
+          $table->addColumn('data', 'json_array', ['notnull' => false]);
 
           $table->setPrimaryKey(['id']);
         });
