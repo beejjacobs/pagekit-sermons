@@ -38,6 +38,13 @@
       <div class="uk-panel">
 
         <div class="uk-form-row">
+          <label for="form-image" class="uk-form-label">{{ 'Image' | trans }}</label>
+          <div class="uk-form-controls">
+            <input-image-meta :image.sync="sermon.data.image" class="pk-image-max-height"></input-image-meta>
+          </div>
+        </div>
+
+        <div class="uk-form-row">
           <label for="form-slug" class="uk-form-label">{{ 'Slug' | trans }}</label>
           <div class="uk-form-controls">
             <input id="form-slug" class="uk-width-1-1" type="text" v-model="sermon.slug">
@@ -81,26 +88,26 @@
         </div>
         <div class="uk-form-row">
           <label for="form-topic" class="uk-form-label">{{ 'Topics' | trans }}</label>
-          <div v-for="topic in sermon.topics">
-            <img src="packages/beejjacobs/sermons/assets/ic_remove_circle_outline_black_24px.svg" width="20" v-on:click="removeTopic(topic)">
-            {{topic.name}}
-          </div>
           <div class="uk-form-controls">
             <select id="form-topic" class="uk-width-1-1" v-model="selected.topic">
               <option v-for="topic in data.topics" :value="topic">{{topic.name}}</option>
             </select>
           </div>
+          <div v-for="topic in sermon.topics">
+            <img src="packages/beejjacobs/sermons/assets/ic_remove_circle_outline_black_24px.svg" width="20" v-on:click="removeTopic(topic)">
+            {{topic.name}}
+          </div>
         </div>
         <div class="uk-form-row">
           <label for="form-bible_book" class="uk-form-label">{{ 'Books of the Bible' | trans }}</label>
-          <div v-for="bible_book in sermon.bible_books">
-            <img src="packages/beejjacobs/sermons/assets/ic_remove_circle_outline_black_24px.svg" width="20" v-on:click="removeBibleBook(bible_book)">
-            {{bible_book.name}}
-          </div>
           <div class="uk-form-controls">
             <select id="form-bible_book" class="uk-width-1-1" v-model="selected.bible_book">
               <option v-for="bible_book in data.bible_books" :value="bible_book">{{bible_book.name}}</option>
             </select>
+          </div>
+          <div v-for="bible_book in sermon.bible_books">
+            <img src="packages/beejjacobs/sermons/assets/ic_remove_circle_outline_black_24px.svg" width="20" v-on:click="removeBibleBook(bible_book)">
+            {{bible_book.name}}
           </div>
         </div>
       </div>

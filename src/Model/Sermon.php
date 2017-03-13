@@ -3,13 +3,14 @@
 namespace beejjacobs\Sermons\Model;
 
 use Pagekit\Database\ORM\ModelTrait;
+use Pagekit\System\Model\DataModelTrait;
 
 /**
  * @Entity(tableClass="@sermons_sermons")
  */
 class Sermon implements \JsonSerializable {
 
-  use ModelTrait;
+  use ModelTrait, DataModelTrait;
 
   const SERMON_SERIES = 'sermon_series';
   const PREACHER = 'preacher';
@@ -101,11 +102,6 @@ class Sermon implements \JsonSerializable {
    * @ManyToMany(targetEntity="beejjacobs\Sermons\Model\Topic", tableThrough="@sermons_sermon_topics", keyThroughFrom="sermon_id", keyThroughTo="topic_id")
    */
   public $topics;
-
-  /**
-   * @Column(type="string")
-   */
-  public $feature_image;
 
   /**
    * Get all Sermons with all related models
