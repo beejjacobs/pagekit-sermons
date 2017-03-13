@@ -16,19 +16,6 @@ use Pagekit\Application;
  */
 class SermonController {
   /**
-   * @Route("/add", name="add")
-   */
-  public function addAction() {
-    return [
-        '$view' => [
-            'title' => __('Add Sermon'),
-            'name' => 'sermons/admin/edit.php'
-        ],
-        'new' => true
-    ];
-  }
-
-  /**
    * @Route("/edit", name="edit")
    * @Request({"id": "int"})
    * @param int $id
@@ -42,10 +29,7 @@ class SermonController {
         if ($id) {
           Application::abort(404, __('Invalid sermon id.'));
         }
-
-        $module = Application::module('sermons');
-
-        $sermon = Sermon::create([]);
+        $sermon = Sermon::create(['date' => new \DateTime('11:00')]);
       }
 
       $user = Application::user();
@@ -53,8 +37,12 @@ class SermonController {
         Application::abort(403, __('Insufficient User Rights.'));
       }
 
-      $sermon->bible_books = array_values($sermon->bible_books);
-      $sermon->topics = array_values($sermon->topics);
+      if (!is_null($sermon->bible_books)) {
+        $sermon->bible_books = array_values($sermon->bible_books);
+      }
+      if (!is_null($sermon->topics)) {
+        $sermon->topics = array_values($sermon->topics);
+      }
 
       return [
           '$view' => [
